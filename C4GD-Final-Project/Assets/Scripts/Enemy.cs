@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
         {
             case 0: // move towards player
                 Vector2 force = new Vector2(player.transform.position.x - transform.position.x, 0).normalized * speed;
-                rb.AddForce(force);
+                rb.velocity = new Vector2(force.x, rb.velocity.y);
                 break;
             case 1: // stand still
                 rb.velocity = new Vector2(0, rb.velocity.y);

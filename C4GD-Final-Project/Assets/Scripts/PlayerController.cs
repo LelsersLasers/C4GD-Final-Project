@@ -21,13 +21,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         dashCd -= Time.deltaTime;
-        //Later remove this once there is ground/solid assets
         if (!isDashing)
         {
             move();
         }
         //Change the transform.position.y to a check for collision with ground later
-        if (Input.GetKeyDown("space") && jumps < 2 && !isDashing)
+        if (Input.GetKeyDown(KeyCode.Space) && jumps < 2 && !isDashing)
         {
             jump();
         }
