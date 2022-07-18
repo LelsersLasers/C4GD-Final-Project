@@ -22,10 +22,6 @@ public class PlayerController : MonoBehaviour
     {
         dashCd -= Time.deltaTime;
         //Later remove this once there is ground/solid assets
-        if (transform.position.y < -4.5f)
-        {
-            transform.position = new Vector2(transform.position.x, -4.5f);
-        }
         if (!isDashing)
         {
             move();
@@ -60,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private void jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        jumps++;
     }
 
     //Returns a unit vector in one of 8 directions based on the arrow key combination used. Add a unit vector in the direction each pressed arrow key to a result vector.
@@ -85,10 +82,9 @@ public class PlayerController : MonoBehaviour
         }
         if (result == Vector2.zero)
         {
-            return Vector2.right;
+            return Vector2.right.normalized;
         }
-        result = result.normalized;
-        return result;
+        return result.normalized;
     }
 
     private IEnumerator dash(Vector2 direction)
