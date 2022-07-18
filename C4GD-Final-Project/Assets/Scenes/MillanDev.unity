@@ -312,7 +312,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1082853273}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e9368ea61d27ba64198bb515144e107d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1595022366}
-  speed: 2
+  speed: 1
   range: 4
 --- !u!1 &1595022366
 GameObject:
@@ -620,8 +620,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd934b6d15af604cb40a8c6cd5d7bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jump: 7
+  speed: 6
+  jumpSpeed: 12
+  dashSpeed: 16
 --- !u!1 &1849529879
 GameObject:
   m_ObjectHideFlags: 0

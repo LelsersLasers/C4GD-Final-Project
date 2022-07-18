@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 10f;
-    public float jump = 100f;
+    public float speed = 6f;
+    public float jumpSpeed = 12f;
+    public float dashSpeed = 16f;
+    private bool isDashing = false;
+    private float dashCd = 0;
     private int jumps = 0;
-
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -18,16 +20,85 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int horizontalInput = 0;
-        horizontalInput -= Input.GetKey(KeyCode.A) ? 1 : 0;
-        horizontalInput += Input.GetKey(KeyCode.D) ? 1 : 0;
-        transform.Translate(horizontalInput * speed * Time.deltaTime, 0, 0);
-        
-        if (Input.GetKeyDown(KeyCode.Space) && jumps < 2)
+        dashCd -= Time.deltaTime;
+        //Later remove this once there is ground/solid assets
+        if (transform.position.y < -4.5f)
         {
-            jumps++;
-            rb.velocity = new Vector2(rb.velocity.x, jump);
+            transform.position = new Vector2(transform.position.x, -4.5f);
         }
+        if (!isDashing)
+        {
+            move();
+        }
+        //Change the transform.position.y to a check for collision with ground later
+        if (Input.GetKeyDown("space") && jumps < 2 && !isDashing)
+        {
+            jump();
+        }
+        //Add check for if the player can dash again later
+        if (Input.GetKey("c") && dashCd <= 0)
+        {
+            dashCd = 2;
+            StartCoroutine(dash(getDirection()));
+        }
+    }
+
+    private void move()
+    {
+        float horizontalInput = 0;
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            horizontalInput = 1;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            horizontalInput = -1;
+        }
+        rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
+    }
+
+    private void jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+    }
+
+    //Returns a unit vector in one of 8 directions based on the arrow key combination used. Add a unit vector in the direction each pressed arrow key to a result vector.
+    //Normalize the final resulting vector and return it. If the final vector ends up being a zero vector, then return Vector2.right.
+    private Vector2 getDirection()
+    {
+        Vector2 result = Vector2.zero;
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            result += new Vector2(1, 0);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            result += new Vector2(-1, 0);
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            result += new Vector2(0, 1);
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            result += new Vector2(0, -1);
+        }
+        if (result == Vector2.zero)
+        {
+            return Vector2.right;
+        }
+        result = result.normalized;
+        return result;
+    }
+
+    private IEnumerator dash(Vector2 direction)
+    {
+        rb.velocity = direction * dashSpeed;
+        isDashing = true;
+        rb.gravityScale = 0f;
+        yield return new WaitForSeconds(0.15f);
+        isDashing = false;
+        rb.gravityScale = 2.4f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

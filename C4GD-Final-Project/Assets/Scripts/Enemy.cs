@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         {
             action = Random.Range(0, 3);
             Debug.Log(action);
-            actionTime = Random.Range(3, 5);
+            actionTime = Random.Range(3f, 5f);
         }
     }
 }
