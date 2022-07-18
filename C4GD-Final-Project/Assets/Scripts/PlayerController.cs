@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
     public float jump = 100f;
     private int jumps = 0;
 
-    private float horizontalInput;
-
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -20,15 +18,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-
-        transform.Translate(Vector2.right * horizontalInput * speed * Time.deltaTime);
+        int horizontalInput = 0;
+        horizontalInput -= Input.GetKey(KeyCode.A) ? 1 : 0;
+        horizontalInput += Input.GetKey(KeyCode.D) ? 1 : 0;
+        transform.Translate(horizontalInput * speed * Time.deltaTime, 0, 0);
         
         if (Input.GetKeyDown(KeyCode.Space) && jumps < 2)
         {
             jumps++;
-            Debug.Log(jumps);
-            rb.velocity = Vector2.up * jump;
+            rb.velocity = new Vector2(rb.velocity.x, jump);
         }
     }
 
