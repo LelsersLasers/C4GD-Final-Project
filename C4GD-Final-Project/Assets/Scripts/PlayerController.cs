@@ -55,11 +55,6 @@ public class PlayerController : MonoBehaviour
     private void jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-        IncrementJumps();
-    }
-
-    public void IncrementJumps()
-    {
         jumps++;
     }
 
