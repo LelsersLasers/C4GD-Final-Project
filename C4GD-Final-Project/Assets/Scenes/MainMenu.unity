@@ -609,7 +609,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1048267269}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2142254389}
+        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
+        m_MethodName: switchToControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1048267269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,7 +1030,6 @@ GameObject:
   - component: {fileID: 1925218377}
   - component: {fileID: 1925218376}
   - component: {fileID: 1925218375}
-  - component: {fileID: 1925218378}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -1090,8 +1101,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1925218378}
-        m_TargetAssemblyTypeName: MainMenuButtons, Assembly-CSharp
+      - m_Target: {fileID: 2142254389}
+        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
         m_MethodName: exitGame
         m_Mode: 1
         m_Arguments:
@@ -1101,7 +1112,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &1925218376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,18 +1151,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925218373}
   m_CullTransparentMesh: 1
---- !u!114 &1925218378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925218373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f51587256078944aa8cdcf9946cfdb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1938485774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,6 +1245,7 @@ GameObject:
   - component: {fileID: 2142254388}
   - component: {fileID: 2142254387}
   - component: {fileID: 2142254386}
+  - component: {fileID: 2142254389}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1301,3 +1301,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2142254389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142254385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f51587256078944aa8cdcf9946cfdb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
