@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         dashCd -= Time.deltaTime;
-
         if (!isDashing)
         {
             move();
@@ -82,10 +81,9 @@ public class PlayerController : MonoBehaviour
         }
         if (result == Vector2.zero)
         {
-            return Vector2.right;
+            return Vector2.right.normalized;
         }
-        result = result.normalized;
-        return result;
+        return result.normalized;
     }
 
     private IEnumerator dash(Vector2 direction)
