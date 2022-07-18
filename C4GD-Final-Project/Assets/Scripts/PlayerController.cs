@@ -21,17 +21,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         dashCd -= Time.deltaTime;
-        //Later remove this once there is ground/solid assets
-        if (transform.position.y < -4.5f)
-        {
-            transform.position = new Vector2(transform.position.x, -4.5f);
-        }
+
         if (!isDashing)
         {
             move();
         }
         //Change the transform.position.y to a check for collision with ground later
-        if (Input.GetKeyDown("space") && jumps < 2 && !isDashing)
+        if (Input.GetKeyDown(KeyCode.Space) && jumps < 2 && !isDashing)
         {
             jump();
         }
@@ -60,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private void jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        jumps++;
     }
 
     //Returns a unit vector in one of 8 directions based on the arrow key combination used. Add a unit vector in the direction each pressed arrow key to a result vector.
