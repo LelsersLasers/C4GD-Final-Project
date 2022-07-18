@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
             move();
         }
         //Change the transform.position.y to a check for collision with ground later
-        if (Input.GetKeyDown(KeyCode.Space) && jumps < 2 && !isDashing)
+        if (Input.GetKeyDown(KeyCode.Space) && jumps < 1 && !isDashing)
         {
             jump();
         }
