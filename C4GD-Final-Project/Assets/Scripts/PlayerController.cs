@@ -55,6 +55,11 @@ public class PlayerController : MonoBehaviour
     private void jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        IncrementJumps();
+    }
+
+    public void IncrementJumps()
+    {
         jumps++;
     }
 
@@ -93,7 +98,7 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.15f);
         isDashing = false;
-        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 5);
         rb.gravityScale = 2.4f;
     }
 
