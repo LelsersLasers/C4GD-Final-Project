@@ -509,7 +509,7 @@ MonoBehaviour:
   attackCd: 1
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
 --- !u!61 &1787175677
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 1865846173}
   - component: {fileID: 1865846172}
   - component: {fileID: 1865846171}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
