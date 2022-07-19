@@ -135,7 +135,8 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-
+        GameObject canvas = GameObject.Find("Canvas");
+        canvas.SetActive(true);
     }
 
     IEnumerator Attack(Vector2 direction)
