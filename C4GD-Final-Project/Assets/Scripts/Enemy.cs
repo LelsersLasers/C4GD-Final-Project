@@ -14,13 +14,17 @@ public class Enemy : MonoBehaviour
 
     private int action = 0;
     private float actionTime = 0;
+
+    public int maxHealth;
+    private int currentHealth;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
         startColor = sr.color;
-        randomAction();
+        RandomAction();
     }
 
     // Update is called once per frame
@@ -29,7 +33,7 @@ public class Enemy : MonoBehaviour
         actionTime -= Time.deltaTime;
         if (actionTime < 0)
         {
-            randomAction();
+            RandomAction();
         }
         sr.color = startColor;
         switch (action)
@@ -47,12 +51,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void randomAction() {
+    void RandomAction() {
         if ((player.transform.position - transform.position).magnitude <= range)
         {
             action = Random.Range(0, 3);
             Debug.Log(action);
             actionTime = Random.Range(3f, 5f);
         }
+    }
+
+    void TakeDamage(int dmg)
+    {
+        currentHealth -= dmg;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+
     }
 }
