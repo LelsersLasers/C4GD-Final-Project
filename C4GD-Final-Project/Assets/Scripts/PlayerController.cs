@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 6f;
     public float jumpSpeed = 12f;
     public float dashSpeed = 16f;
+    public int damage = 5;
     private bool isDashing = false;
     private bool isAttacking = false;
     private float dashCd = 0;
@@ -132,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider2D target in hitTargets)
         {
-            target.GetComponent<Enemy>().TakeDamage(4);
+            target.GetComponent<Enemy>().TakeDamage(damage);
         }
         //Time should be as long as the attack animation
         isAttacking = true;

@@ -822,6 +822,7 @@ MonoBehaviour:
   speed: 6
   jumpSpeed: 12
   dashSpeed: 16
+  damage: 5
   maxHealth: 10
   attackPoint: {fileID: 1071071962}
   hp: {fileID: 966283375}
