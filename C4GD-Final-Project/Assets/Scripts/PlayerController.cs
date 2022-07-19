@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private float dashCd = 0;
     private int jumps = 0;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
     public int maxHealth;
     private int currentHealth;
     
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         hpW = hp.localScale.x;
     }
@@ -38,6 +40,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (rb.velocity.x < 0) {
+            sr.flipX = true;
+        }
+        else if (rb.velocity.x > 0) {
+            sr.flipX = false;
+        }
         hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
         dashCd -= Time.deltaTime;
         if (!isDashing)
@@ -45,7 +53,7 @@ public class PlayerController : MonoBehaviour
             Move();
         }
         //Change the transform.position.y to a check for collision with ground later
-        if (Input.GetKeyDown(KeyCode.Space) && jumps < 1 && !isDashing)
+        if (Input.GetKey(KeyCode.Space) && jumps < 1 && !isDashing)
         {
             Jump();
         }
