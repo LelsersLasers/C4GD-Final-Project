@@ -14,7 +14,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public int maxHealth;
     private int currentHealth;
+    
     public Transform attackPoint;
+    public Transform hp;
+    private float hpW;
+
     public float attackRange = 0.5f;
     public float attackCd = 1.0f;
     private float nextAttackTime = 0f;
@@ -25,11 +29,13 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        hpW = hp.localScale.x;
     }
 
     // Update is called once per frame
     void Update()
     {
+        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
         dashCd -= Time.deltaTime;
         if (!isDashing)
         {
