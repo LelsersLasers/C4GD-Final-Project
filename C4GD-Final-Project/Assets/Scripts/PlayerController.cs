@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public int maxHealth;
     private int currentHealth;
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public float attackRate = 1.0f;
+    public LayerMask enemyLayers;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +40,7 @@ public class PlayerController : MonoBehaviour
         //Add check for if the player can dash again later
         if (Input.GetKey("c") && dashCd <= 0)
         {
-            dashCd = 2;
+            dashCd = 1.5f;
             StartCoroutine(Dash(getDirection()));
         }
     }
@@ -101,6 +105,18 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
 
+    }
+
+    void Attack()
+    {
+        //Set trigger for animator once we have animations
+
+        Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        foreach (Collider2D target in hitTargets)
+        {
+
+        }
     }
 
     private IEnumerator Dash(Vector2 direction)
