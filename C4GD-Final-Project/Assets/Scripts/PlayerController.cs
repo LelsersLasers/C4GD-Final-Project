@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     private float nextAttackTime = 0f;
     public LayerMask enemyLayers;
     private float orientation = 1f;
+    public bool iFramesActive = false;
+    public float iFrameDuration = 0.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -110,13 +112,17 @@ public class PlayerController : MonoBehaviour
         return result.normalized;
     }
 
-    void TakeDamage(int dmg)
+    IEnumerator TakeDamage(int dmg)
     {
         currentHealth -= dmg;
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             Die();
         }
+        iFramesActive = true;
+        yield return new WaitForSeconds(iFrameDuration);
+        iFramesActive = false;
     }
 
     void Die()
@@ -158,6 +164,13 @@ public class PlayerController : MonoBehaviour
         if ((collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled))
         {
             jumps = 0;
+        }
+        if (collision.gameObject.GetComponent<Enemy>() != null)
+        {
+            if (!iFramesActive)
+            {
+                StartCoroutine(TakeDamage(collision.gameObject.GetComponent<Enemy>().GetDamage()));
+            }
         }
     }
 

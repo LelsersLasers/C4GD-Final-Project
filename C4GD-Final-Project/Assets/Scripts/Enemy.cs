@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
 
     public int maxHealth;
     private int currentHealth;
+    public int dmg;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,5 +64,10 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
         Destroy(gameObject);
+    }
+
+    public int GetDamage()
+    {
+        return dmg;
     }
 }
