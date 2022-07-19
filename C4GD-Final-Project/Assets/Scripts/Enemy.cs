@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer sr;
     private Color startColor;
 
-    private int action = 0;
-    private float actionTime = 0;
+    public Transform hp;
+    private float hpW;
 
     public int maxHealth;
     private int currentHealth;
@@ -24,39 +24,18 @@ public class Enemy : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         startColor = sr.color;
-        RandomAction();
+        hpW = hp.localScale.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        actionTime -= Time.deltaTime;
-        if (actionTime < 0)
-        {
-            RandomAction();
+        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
+        if ((player.transform.position - transform.position).magnitude <= range) {
+            sr.color = Color.blue;
         }
-        sr.color = startColor;
-        switch (action)
-        {
-            case 0: // move towards player
-                Vector2 force = new Vector2(player.transform.position.x - transform.position.x, 0).normalized * speed;
-                rb.velocity = new Vector2(force.x, rb.velocity.y);
-                break;
-            case 1: // stand still
-                rb.velocity = new Vector2(0, rb.velocity.y);
-                break;
-            case 2: // shoot
-                sr.color = Color.red;
-                break;
-        }
-    }
-
-    void RandomAction() {
-        if ((player.transform.position - transform.position).magnitude <= range)
-        {
-            action = Random.Range(0, 3);
-            Debug.Log(action);
-            actionTime = Random.Range(3f, 5f);
+        else {
+            sr.color = startColor;
         }
     }
 
@@ -72,8 +51,17 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         //Set death animation later
-
+        sr.color = Color.red;
+        hp.localScale = new Vector3(0, 0, 0);
+        rb.velocity = new Vector2(0, rb.velocity.y);
         this.enabled = false;
         GetComponent<Collider2D>().enabled = false;
+        StartCoroutine(DelayedDestory());
+    }
+
+    private IEnumerator DelayedDestory()
+    {
+        yield return new WaitForSeconds(4f);
+        Destroy(gameObject);
     }
 }

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 6f;
     public float jumpSpeed = 12f;
     public float dashSpeed = 16f;
+    public int damage = 5;
     private bool isDashing = false;
     private bool isAttacking = false;
     private float dashCd = 0;
@@ -14,21 +15,28 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public int maxHealth;
     private int currentHealth;
+    
     public Transform attackPoint;
+    public Transform hp;
+    private float hpW;
+
     public float attackRange = 0.5f;
     public float attackCd = 1.0f;
     private float nextAttackTime = 0f;
     public LayerMask enemyLayers;
+    private float orientation = 1f;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        hpW = hp.localScale.x;
     }
 
     // Update is called once per frame
     void Update()
     {
+        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
         dashCd -= Time.deltaTime;
         if (!isDashing)
         {
@@ -55,13 +63,15 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         float horizontalInput = 0;
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            horizontalInput = 1;
-        }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             horizontalInput = -1;
+            orientation = -1;
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            horizontalInput = 1;
+            orientation = 1;
         }
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
     }
@@ -95,7 +105,7 @@ public class PlayerController : MonoBehaviour
         }
         if (result == Vector2.zero)
         {
-            return Vector2.right.normalized;
+            return new Vector2(orientation,0);
         }
         return result.normalized;
     }
@@ -123,7 +133,7 @@ public class PlayerController : MonoBehaviour
 
         foreach (Collider2D target in hitTargets)
         {
-            target.GetComponent<Enemy>().TakeDamage(4);
+            target.GetComponent<Enemy>().TakeDamage(damage);
         }
         //Time should be as long as the attack animation
         isAttacking = true;
