@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public float attackCd = 1.0f;
     private float nextAttackTime = 0f;
     public LayerMask enemyLayers;
+    private float orientation = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,13 +63,15 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         float horizontalInput = 0;
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            horizontalInput = 1;
-        }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             horizontalInput = -1;
+            orientation = -1;
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            horizontalInput = 1;
+            orientation = 1;
         }
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
     }
@@ -102,7 +105,7 @@ public class PlayerController : MonoBehaviour
         }
         if (result == Vector2.zero)
         {
-            return Vector2.right.normalized;
+            return new Vector2(orientation,0);
         }
         return result.normalized;
     }
