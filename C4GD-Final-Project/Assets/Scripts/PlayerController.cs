@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour
     private float dashCd = 0;
     private int jumps = 0;
     private Rigidbody2D rb;
+    public int maxHealth;
+    private int currentHealth;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -23,22 +26,22 @@ public class PlayerController : MonoBehaviour
         dashCd -= Time.deltaTime;
         if (!isDashing)
         {
-            move();
+            Move();
         }
         //Change the transform.position.y to a check for collision with ground later
         if (Input.GetKeyDown(KeyCode.Space) && jumps < 1 && !isDashing)
         {
-            jump();
+            Jump();
         }
         //Add check for if the player can dash again later
         if (Input.GetKey("c") && dashCd <= 0)
         {
             dashCd = 2;
-            StartCoroutine(dash(getDirection()));
+            StartCoroutine(Dash(getDirection()));
         }
     }
 
-    private void move()
+    private void Move()
     {
         float horizontalInput = 0;
         if (Input.GetKey(KeyCode.RightArrow))
@@ -52,7 +55,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
     }
 
-    private void jump()
+    private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         jumps++;
@@ -86,7 +89,21 @@ public class PlayerController : MonoBehaviour
         return result.normalized;
     }
 
-    private IEnumerator dash(Vector2 direction)
+    void TakeDamage(int dmg)
+    {
+        currentHealth -= dmg;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+
+    }
+
+    private IEnumerator Dash(Vector2 direction)
     {
         rb.velocity = direction * dashSpeed;
         isDashing = true;
