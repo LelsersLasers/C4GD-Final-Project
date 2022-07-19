@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 12f;
     public float dashSpeed = 16f;
     private bool isDashing = false;
+    private bool isAttacking = false;
     private float dashCd = 0;
     private int jumps = 0;
     private Rigidbody2D rb;
@@ -15,7 +16,8 @@ public class PlayerController : MonoBehaviour
     private int currentHealth;
     public Transform attackPoint;
     public float attackRange = 0.5f;
-    public float attackRate = 1.0f;
+    public float attackCd = 1.0f;
+    private float nextAttackTime = 0f;
     public LayerMask enemyLayers;
     // Start is called before the first frame update
     void Start()
@@ -38,10 +40,15 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
         //Add check for if the player can dash again later
-        if (Input.GetKey("c") && dashCd <= 0)
+        if (Input.GetKey("c") && dashCd <= 0 && !isAttacking)
         {
             dashCd = 1.5f;
-            StartCoroutine(Dash(getDirection()));
+            StartCoroutine(Dash(GetDirection()));
+        }
+        if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
+        {
+            StartCoroutine(Attack(GetDirection()));
+            nextAttackTime = Time.time + attackCd;
         }
     }
 
@@ -67,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     //Returns a unit vector in one of 8 directions based on the arrow key combination used. Add a unit vector in the direction each pressed arrow key to a result vector.
     //Normalize the final resulting vector and return it. If the final vector ends up being a zero vector, then return Vector2.right.
-    private Vector2 getDirection()
+    private Vector2 GetDirection()
     {
         Vector2 result = Vector2.zero;
         if (Input.GetKey(KeyCode.RightArrow))
@@ -107,16 +114,22 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Attack()
+    IEnumerator Attack(Vector2 direction)
     {
         //Set trigger for animator once we have animations
 
+        attackPoint.RotateAround(transform.position, new Vector3(0,0,1), Vector2.SignedAngle(new Vector2(1,0), direction));
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         foreach (Collider2D target in hitTargets)
         {
-
+            target.GetComponent<Enemy>().TakeDamage(4);
         }
+        //Time should be as long as the attack animation
+        isAttacking = true;
+        yield return new WaitForSeconds(0.2f);
+        attackPoint.RotateAround(transform.position, new Vector3(0, 0, 1), -Vector2.SignedAngle(new Vector2(1, 0), direction));
+        isAttacking = false;
     }
 
     private IEnumerator Dash(Vector2 direction)
@@ -137,4 +150,15 @@ public class PlayerController : MonoBehaviour
             jumps = 0;
         }
     }
+
+    
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+    
 }
