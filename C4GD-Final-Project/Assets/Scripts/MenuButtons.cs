@@ -12,7 +12,4 @@ public class MenuButtons : MonoBehaviour
     public void switchToControls() {
         SceneManager.LoadScene("ControlsScreen");
     }
-    public void exitGame() {
-        Application.Quit();
-    }
 }
