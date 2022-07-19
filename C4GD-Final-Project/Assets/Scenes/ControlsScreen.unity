@@ -191,7 +191,7 @@ MonoBehaviour:
     attack: Z
 
 
-    c: dash
+    dash: C
 
     use arrow keys to choose direction  and you can
     dash diagonally'
