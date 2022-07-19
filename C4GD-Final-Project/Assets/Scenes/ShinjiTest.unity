@@ -821,7 +821,7 @@ MonoBehaviour:
   minJump: 4
   maxJump: 7
   jumpCd: 2
-  attackCd: 3
+  attackCd: 2
   jumpSpeed: 4
 --- !u!1 &1503468770
 GameObject:
@@ -976,6 +976,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
+  iFramesActive: 0
+  iFrameDuration: 0.2
 --- !u!61 &1787175677
 BoxCollider2D:
   m_ObjectHideFlags: 0
