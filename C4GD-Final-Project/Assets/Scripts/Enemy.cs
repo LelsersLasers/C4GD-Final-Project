@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void TakeDamage(int dmg)
+    public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
         if (currentHealth <= 0)
@@ -71,6 +71,9 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        //Set death animation later
 
+        this.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
     }
 }
