@@ -16,6 +16,7 @@ public class Slime : MonoBehaviour
     private float timeSinceAttack = 0f;
     private Rigidbody2D slimeRb;
     private Animator slimeAnim;
+    private bool isJumping = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,22 +33,22 @@ public class Slime : MonoBehaviour
             if (!lockedOn)
             {
                 Vector2 position = new Vector2(Random.Range(transform.position.x - 6, transform.position.x + 6), Random.Range(transform.position.y - 6, transform.position.y + 6));
-                Jump(position);
+                StartCoroutine(Jump(position));
             }
             else
             {
-                Jump(player.transform.position);
+                StartCoroutine(Jump(player.transform.position));
             }
             timeSinceJump = Time.time + jumpCd;
         }
-        if (lockedOn && Time.time >= timeSinceAttack)
+        if (lockedOn && Time.time >= timeSinceAttack && !isJumping)
         {
             Attack();
             timeSinceAttack = Time.time + attackCd;
         }
     }
 
-    void Jump(Vector2 target)
+    IEnumerator Jump(Vector2 target)
     {
         float jumpMultiplier = Random.Range(minJump, maxJump);
         float directionX;
@@ -59,8 +60,14 @@ public class Slime : MonoBehaviour
         {
             directionX = Random.Range(-5f, 3f);
         }
-        slimeRb.velocity = new Vector2(directionX, 0) * jumpMultiplier;
+        float directionY = Random.Range(3f, 5f);
         slimeAnim.SetTrigger("JumpTrigger");
+        yield return new WaitForSeconds(0.6f);
+        slimeRb.velocity = new Vector2(directionX, directionY).normalized * jumpMultiplier;
+        isJumping = true;
+        yield return new WaitForSeconds(1f);
+        isJumping = false;
+        slimeRb.velocity = Vector2.zero;
     }
     void Attack()
     {

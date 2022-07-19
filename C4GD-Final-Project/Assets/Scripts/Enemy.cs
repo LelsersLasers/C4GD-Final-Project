@@ -31,15 +31,11 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
-
         if ((player.transform.position - transform.position).magnitude <= range) {
-            Vector2 force = new Vector2(player.transform.position.x - transform.position.x, 0).normalized * speed;
-            rb.velocity = new Vector2(force.x, rb.velocity.y);
             sr.color = Color.blue;
         }
         else {
             sr.color = startColor;
-            rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
 
