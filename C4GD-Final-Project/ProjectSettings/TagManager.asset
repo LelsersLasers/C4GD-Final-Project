@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Platform
   - Enemy
+  - Trap
   layers:
   - Default
   - TransparentFX
