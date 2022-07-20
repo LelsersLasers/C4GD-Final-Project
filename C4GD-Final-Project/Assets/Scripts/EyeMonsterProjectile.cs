@@ -6,32 +6,40 @@ public class EyeMonsterProjectile : MonoBehaviour
 {
     private Animator projAnim;
     private Rigidbody2D projRb;
-    public float projSpeed = 8f;
-    private bool hasCollided = false;
+    private GameObject player;
+    public float projSpeed = 10f;
+    private float spawnTime;
     // Start is called before the first frame update
     void Start()
     {
         projAnim = GetComponent<Animator>();
         projRb = GetComponent<Rigidbody2D>();
+        player = GameObject.Find("Player");
+        spawnTime = Time.time;
+        projRb.AddForce(-(transform.position - player.transform.position).normalized * projSpeed, ForceMode2D.Impulse);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!hasCollided)
+        if (Time.time > spawnTime + 2.5f)
         {
-            projRb.velocity = transform.forward * projSpeed;
+            StartCoroutine(Explode());
         }
     }
 
-    private IEnumerator OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ground")
-        {
-            hasCollided = true;
-            projAnim.SetTrigger("HitTrigger");
-            yield return new WaitForSeconds(1);
-            Destroy(gameObject);
-        }
+        StartCoroutine(Explode());
+    }
+
+    IEnumerator Explode()
+    {
+        projRb.velocity = Vector2.zero;
+        projAnim.SetTrigger("HitTrigger");
+        yield return new WaitForSeconds(1);
+        GetComponent<EyeMonsterProjectile>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        Destroy(gameObject);
     }
 }

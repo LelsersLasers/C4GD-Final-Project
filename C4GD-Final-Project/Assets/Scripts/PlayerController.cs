@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
         return result.normalized;
     }
 
-    IEnumerator TakeDamage(int dmg)
+    public IEnumerator TakeDamage(int dmg)
     {
         currentHealth -= dmg;
         if (currentHealth <= 0)

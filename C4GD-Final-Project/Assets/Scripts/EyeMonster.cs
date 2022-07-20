@@ -45,7 +45,7 @@ public class EyeMonster : MonoBehaviour
         eyeRb.velocity = Vector2.zero;
         eyeAnim.SetTrigger("ShootTrigger");
         isShooting = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.15f);
         Instantiate(eyeMonsterProjectile, transform.position, Quaternion.FromToRotation(Vector2.right, player.transform.position));
         isShooting = false;
     }

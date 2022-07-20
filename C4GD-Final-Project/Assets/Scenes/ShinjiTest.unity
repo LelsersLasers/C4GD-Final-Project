@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e01084c0954b149bfe2c5846a91545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1347167151}
 --- !u!81 &458449968
 AudioListener:
   m_ObjectHideFlags: 0
@@ -937,7 +937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b44510f149949b43b4eeead6e9a0b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1347167151}
   speed: 10
   range: 5
   hp: {fileID: 672199979}
@@ -1034,7 +1034,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.056198597, y: -0.04437107}
@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b44510f149949b43b4eeead6e9a0b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1347167151}
   speed: 10
   range: 5
   hp: {fileID: 1000517780}
@@ -1189,7 +1189,7 @@ MonoBehaviour:
   player: {fileID: 1347167151}
   eyeMonsterProjectile: {fileID: 8597063348304242930, guid: 69f0edbf5dad6bd4294b4691466a05b1, type: 3}
   flySpeed: 6
-  attackCd: 1.2
+  attackCd: 0.8
   aggroRange: 12
 --- !u!1 &1503468770
 GameObject:
@@ -1331,7 +1331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0469c20f4f15c43aa7ba44507ebadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1347167151}
 --- !u!61 &1917292020
 BoxCollider2D:
   m_ObjectHideFlags: 0
