@@ -29,8 +29,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask enemyLayers;
     private float orientation = 1f;
     public bool iFramesActive = false;
-    public float iFrameDuration = 0.2f;
+    public float iFrameDuration = 0.5f;
     private bool isOnGround = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -192,7 +193,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     
     void OnDrawGizmosSelected()
     {
