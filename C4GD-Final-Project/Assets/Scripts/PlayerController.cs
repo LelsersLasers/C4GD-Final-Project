@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    Animator animator;
+    public SpriteRenderer SpriteRenderer; 
     public float speed = 6f;
     public float jumpSpeed = 12f;
     public float dashSpeed = 16f;
@@ -11,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
     private bool isAttacking = false;
     private float dashCd = 0;
-    private int jumps = 0;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     public int maxHealth;
@@ -28,9 +30,12 @@ public class PlayerController : MonoBehaviour
     private float orientation = 1f;
     public bool iFramesActive = false;
     public float iFrameDuration = 0.5f;
+    private bool isOnGround = true;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
@@ -40,7 +45,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.x < 0) {
+        if (rb.velocity.x < 0 ) {
             sr.flipX = true;
         }
         else if (rb.velocity.x > 0) {
@@ -53,7 +58,7 @@ public class PlayerController : MonoBehaviour
             Move();
         }
         //Change the transform.position.y to a check for collision with ground later
-        if (Input.GetKey(KeyCode.Space) && jumps < 1 && !isDashing)
+        if (Input.GetKey(KeyCode.Space) && isOnGround && !isDashing)
         {
             Jump();
         }
@@ -63,37 +68,43 @@ public class PlayerController : MonoBehaviour
             dashCd = 1.5f;
             StartCoroutine(Dash(GetDirection()));
         }
-        if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
+        if (Input.GetKey("x") && !isDashing && Time.deltaTime >= nextAttackTime)
         {
             StartCoroutine(Attack(GetDirection()));
-            nextAttackTime = Time.time + attackCd;
+            nextAttackTime = Time.deltaTime + attackCd;
         }
     }
 
     private void Move()
     {
         float horizontalInput = 0;
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey("a"))
         {
+            
             horizontalInput = -1;
             orientation = -1;
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey("d"))
         {
             horizontalInput = 1;
             orientation = 1;
+
         }
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
+       
+        
+        animator.SetBool("IsRunning",isOnGround && horizontalInput != 0);
+        
     }
 
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-        jumps++;
+        isOnGround = false;
     }
 
     //Returns a unit vector in one of 8 directions based on the arrow key combination used. Add a unit vector in the direction each pressed arrow key to a result vector.
-    //Normalize the final resulting vector and return it. If the final vector ends up being a zero vector, then return Vector2.right.
+    //Normalize the final resulting vector and return it.
     private Vector2 GetDirection()
     {
         Vector2 result = Vector2.zero;
@@ -172,7 +183,7 @@ public class PlayerController : MonoBehaviour
     {
         if ((collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled))
         {
-            jumps = 0;
+            isOnGround = true;
         }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
