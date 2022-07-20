@@ -35,12 +35,13 @@ public class EyeMonsterProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ground" || other.gameObject.tag == "Wall")
         {
+            StartCoroutine(Explode());
+            /*
             if (other.gameObject.tag == "Player")
             {
                 StartCoroutine(playerC.TakeDamage(dmg));
-                dmg = 0;
             }
-            StartCoroutine(Explode());
+            */
         }
     }
 
