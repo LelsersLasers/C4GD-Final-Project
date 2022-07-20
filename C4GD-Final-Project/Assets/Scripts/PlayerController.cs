@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    Animator animator;
+    public SpriteRenderer SpriteRenderer; 
     public float speed = 6f;
     public float jumpSpeed = 12f;
     public float dashSpeed = 16f;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         hpW = hp.localScale.x;
@@ -53,25 +56,27 @@ public class PlayerController : MonoBehaviour
             dashCd = 1.5f;
             StartCoroutine(Dash(GetDirection()));
         }
-        if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
+        if (Input.GetKey("x") && !isDashing && Time.deltaTime >= nextAttackTime)
         {
             StartCoroutine(Attack(GetDirection()));
-            nextAttackTime = Time.time + attackCd;
+            nextAttackTime = Time.deltaTime + attackCd;
         }
     }
 
     private void Move()
     {
-        float horizontalInput = 0;
-        if (Input.GetKey(KeyCode.LeftArrow))
+        float horizontalInput = (Input.GetAxis("Horizontal"));
+        if (horizontalInput < 0)
         {
+            
             horizontalInput = -1;
             orientation = -1;
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (horizontalInput > 0)
         {
             horizontalInput = 1;
             orientation = 1;
+
         }
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
     }
