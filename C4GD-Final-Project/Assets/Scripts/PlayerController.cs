@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false;
     private float dashCd = 0;
 
+    public float deathY = -25f;
+    public GameObject canvas;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     public int maxHealth;
@@ -80,6 +83,10 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Attack(GetDirection()));
             nextAttackTime = Time.time + attackCd;
+        }
+        if (transform.position.y < deathY)
+        {
+            Die();
         }
     }
 
@@ -164,7 +171,6 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        GameObject canvas = GameObject.Find("Canvas");
         canvas.SetActive(true);
     }
 
