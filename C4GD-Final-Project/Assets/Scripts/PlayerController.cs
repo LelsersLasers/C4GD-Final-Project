@@ -68,10 +68,10 @@ public class PlayerController : MonoBehaviour
             dashCd = 1.5f;
             StartCoroutine(Dash(GetDirection()));
         }
-        if (Input.GetKey("x") && !isDashing && Time.deltaTime >= nextAttackTime)
+        if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
         {
             StartCoroutine(Attack(GetDirection()));
-            nextAttackTime = Time.deltaTime + attackCd;
+            nextAttackTime = Time.time + attackCd;
         }
     }
 
