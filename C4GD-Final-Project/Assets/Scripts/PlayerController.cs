@@ -20,8 +20,13 @@ public class PlayerController : MonoBehaviour
     private int currentHealth;
     
     public Transform attackPoint;
+
     public Transform hp;
     private float hpW;
+
+    public Transform cd;
+    private float cdW;
+
 
     public float attackRange = 0.5f;
     public float attackCd = 1.0f;
@@ -29,8 +34,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask enemyLayers;
     private float orientation = 1f;
     public bool iFramesActive = false;
-    public float iFrameDuration = 0.2f;
+    public float iFrameDuration = 0.5f;
     private bool isOnGround = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +45,7 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         hpW = hp.localScale.x;
+        cdW = cd.localScale.x;
     }
 
     // Update is called once per frame
@@ -50,8 +57,10 @@ public class PlayerController : MonoBehaviour
         else if (rb.velocity.x > 0) {
             sr.flipX = false;
         }
-        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
+        
         dashCd -= Time.deltaTime;
+        UpdateHud();
+       
         if (!isDashing)
         {
             Move();
@@ -67,23 +76,33 @@ public class PlayerController : MonoBehaviour
             dashCd = 1.5f;
             StartCoroutine(Dash(GetDirection()));
         }
-        if (Input.GetKey("x") && !isDashing && Time.deltaTime >= nextAttackTime)
+        if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
         {
             StartCoroutine(Attack(GetDirection()));
-            nextAttackTime = Time.deltaTime + attackCd;
+            nextAttackTime = Time.time + attackCd;
         }
+    }
+
+    private void UpdateHud()
+    {
+        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
+        float dashDisplay = (1.5f - dashCd) / 1.5f;
+        if (dashDisplay > 1) {
+            dashDisplay = 1;
+        }
+        cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
     }
 
     private void Move()
     {
         float horizontalInput = 0;
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
             
             horizontalInput = -1;
             orientation = -1;
         }
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
             horizontalInput = 1;
             orientation = 1;
@@ -107,19 +126,19 @@ public class PlayerController : MonoBehaviour
     private Vector2 GetDirection()
     {
         Vector2 result = Vector2.zero;
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey("d"))
         {
             result += new Vector2(1, 0);
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey("a"))
         {
             result += new Vector2(-1, 0);
         }
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey("w"))
         {
             result += new Vector2(0, 1);
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey("s"))
         {
             result += new Vector2(0, -1);
         }
@@ -192,7 +211,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     
     void OnDrawGizmosSelected()
     {
