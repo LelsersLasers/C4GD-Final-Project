@@ -16,9 +16,6 @@ public class PlayerController : MonoBehaviour
 
     public bool alive = true;
 
-    private float maxRot = 90f;
-    private float currentRot = 0;
-
     public float deathY = -25f;
     public GameObject deathUI;
     public GameObject winUI;
@@ -97,15 +94,6 @@ public class PlayerController : MonoBehaviour
                 Die();
             }
         }
-        else
-        {
-            currentRot += orientation * Time.deltaTime * 180f;
-            if ((orientation == 1 && currentRot > maxRot) || (orientation == -1 && currentRot < maxRot))
-            {
-                currentRot = maxRot;
-            }
-            transform.rotation = Quaternion.Euler(0, 0, currentRot);
-        }
     }
 
     private void UpdateHud()
@@ -141,12 +129,9 @@ public class PlayerController : MonoBehaviour
             orientation = 1;
 
         }
-        maxRot = 90f * orientation;
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
-       
         
         animator.SetBool("IsRunning",isOnGround && horizontalInput != 0);
-        
     }
 
     private void Jump()
@@ -251,6 +236,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Trap")
         {
             Die();
+            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
