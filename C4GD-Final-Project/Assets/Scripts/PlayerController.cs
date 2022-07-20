@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
     private float dashCd = 0;
 
     public float deathY = -25f;
-    public GameObject canvas;
+    public GameObject deathUI;
+    public GameObject winUI;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -171,7 +172,12 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        canvas.SetActive(true);
+        deathUI.SetActive(true);
+    }
+
+    void Win()
+    {
+        winUI.SetActive(true);
     }
 
     IEnumerator Attack(Vector2 direction)
