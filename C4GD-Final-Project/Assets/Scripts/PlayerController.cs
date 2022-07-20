@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Returns a unit vector in one of 8 directions based on the arrow key combination used. Add a unit vector in the direction each pressed arrow key to a result vector.
-    //Normalize the final resulting vector and return it. If the final vector ends up being a zero vector, then return Vector2.right.
+    //Normalize the final resulting vector and return it.
     private Vector2 GetDirection()
     {
         Vector2 result = Vector2.zero;
