@@ -12,4 +12,7 @@ public class MenuButtons : MonoBehaviour
     public void switchToControls() {
         SceneManager.LoadScene("ControlsScreen");
     }
+    public void switchToLevel1() {
+        SceneManager.LoadScene("Level 1");
+    }
 }
