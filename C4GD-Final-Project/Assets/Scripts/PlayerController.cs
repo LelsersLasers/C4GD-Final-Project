@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false;
     private float dashCd = 0;
 
+    public bool alive = true;
+
     public float deathY = -25f;
     public GameObject deathUI;
     public GameObject winUI;
@@ -55,39 +57,42 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.x < 0 ) {
-            sr.flipX = true;
-        }
-        else if (rb.velocity.x > 0) {
-            sr.flipX = false;
-        }
+        if (alive)
+        {
+            if (rb.velocity.x < 0 ) {
+                sr.flipX = true;
+            }
+            else if (rb.velocity.x > 0) {
+                sr.flipX = false;
+            }
+            
+            dashCd -= Time.deltaTime;
+            UpdateHud();
         
-        dashCd -= Time.deltaTime;
-        UpdateHud();
-       
-        if (!isDashing)
-        {
-            Move();
-        }
-        //Change the transform.position.y to a check for collision with ground later
-        if (Input.GetKey(KeyCode.Space) && isOnGround && !isDashing)
-        {
-            Jump();
-        }
-        //Add check for if the player can dash again later
-        if (Input.GetKey("c") && dashCd <= 0 && !isAttacking)
-        {
-            dashCd = 1.5f;
-            StartCoroutine(Dash(GetDirection()));
-        }
-        if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
-        {
-            StartCoroutine(Attack(GetDirection()));
-            nextAttackTime = Time.time + attackCd;
-        }
-        if (transform.position.y < deathY)
-        {
-            Die();
+            if (!isDashing)
+            {
+                Move();
+            }
+            //Change the transform.position.y to a check for collision with ground later
+            if (Input.GetKey(KeyCode.Space) && isOnGround && !isDashing)
+            {
+                Jump();
+            }
+            //Add check for if the player can dash again later
+            if (Input.GetKey("c") && dashCd <= 0 && !isAttacking)
+            {
+                dashCd = 1.5f;
+                StartCoroutine(Dash(GetDirection()));
+            }
+            if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
+            {
+                StartCoroutine(Attack(GetDirection()));
+                nextAttackTime = Time.time + attackCd;
+            }
+            if (transform.position.y < deathY)
+            {
+                Die();
+            }
         }
     }
 
@@ -173,6 +178,8 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         deathUI.SetActive(true);
+        alive = false;
+        rb.velocity = new Vector2(0, 0);
     }
 
     void Win()
