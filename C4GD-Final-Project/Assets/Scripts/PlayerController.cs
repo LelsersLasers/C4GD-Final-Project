@@ -20,8 +20,13 @@ public class PlayerController : MonoBehaviour
     private int currentHealth;
     
     public Transform attackPoint;
+
     public Transform hp;
     private float hpW;
+
+    public Transform cd;
+    private float cdW;
+
 
     public float attackRange = 0.5f;
     public float attackCd = 1.0f;
@@ -40,6 +45,7 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         hpW = hp.localScale.x;
+        cdW = cd.localScale.x;
     }
 
     // Update is called once per frame
@@ -51,8 +57,10 @@ public class PlayerController : MonoBehaviour
         else if (rb.velocity.x > 0) {
             sr.flipX = false;
         }
-        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
+        
         dashCd -= Time.deltaTime;
+        UpdateHud();
+       
         if (!isDashing)
         {
             Move();
@@ -73,6 +81,16 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Attack(GetDirection()));
             nextAttackTime = Time.time + attackCd;
         }
+    }
+
+    private void UpdateHud()
+    {
+        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
+        float dashDisplay = (1.5f - dashCd) / 1.5f;
+        if (dashDisplay > 1) {
+            dashDisplay = 1;
+        }
+        cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
     }
 
     private void Move()
