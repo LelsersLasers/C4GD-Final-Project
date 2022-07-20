@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'left/right: A/D or arrow keys
+  m_text: 'left/right: arrow keys
 
     space: jump
 
