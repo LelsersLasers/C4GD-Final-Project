@@ -11260,6 +11260,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.13
       objectReference: {fileID: 0}
+    - target: {fileID: 3776250454957391968, guid: 1717412f166407d49aabcd19918b784d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776250454957391975, guid: 1717412f166407d49aabcd19918b784d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776250454957391975, guid: 1717412f166407d49aabcd19918b784d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776250454957391975, guid: 1717412f166407d49aabcd19918b784d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 3776250456493509353, guid: 1717412f166407d49aabcd19918b784d, type: 3}
       propertyPath: m_Size.x
       value: 0.367968
@@ -13161,6 +13177,7 @@ GameObject:
   - component: {fileID: 1463885702}
   - component: {fileID: 1463885701}
   - component: {fileID: 1463885700}
+  - component: {fileID: 1463885703}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -13203,7 +13220,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -13234,6 +13251,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1463885703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463885699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e01084c0954b149bfe2c5846a91545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1488361401}
 --- !u!4 &1478316070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2018365450437254147, guid: 1509360826d6bb34587310ad4949fdd5, type: 3}

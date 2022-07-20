@@ -77,13 +77,13 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         float horizontalInput = 0;
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
             
             horizontalInput = -1;
             orientation = -1;
         }
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
             horizontalInput = 1;
             orientation = 1;
