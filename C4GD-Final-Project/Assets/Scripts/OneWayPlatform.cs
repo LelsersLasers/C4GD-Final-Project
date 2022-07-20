@@ -12,6 +12,7 @@ public class OneWayPlatform : MonoBehaviour
     void Start()
     {
         bc = GetComponent<BoxCollider2D>();
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame

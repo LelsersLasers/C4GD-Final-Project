@@ -14,6 +14,12 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false;
     private float dashCd = 0;
 
+    public bool alive = true;
+
+    public float deathY = -25f;
+    public GameObject deathUI;
+    public GameObject winUI;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     public int maxHealth;
@@ -51,46 +57,61 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.x < 0 ) {
-            sr.flipX = true;
-        }
-        else if (rb.velocity.x > 0) {
-            sr.flipX = false;
-        }
-        
-        dashCd -= Time.deltaTime;
         UpdateHud();
-       
-        if (!isDashing)
+        if (alive)
         {
-            Move();
-        }
-        //Change the transform.position.y to a check for collision with ground later
-        if (Input.GetKey(KeyCode.Space) && isOnGround && !isDashing)
-        {
-            Jump();
-        }
-        //Add check for if the player can dash again later
-        if (Input.GetKey("c") && dashCd <= 0 && !isAttacking)
-        {
-            dashCd = 1.5f;
-            StartCoroutine(Dash(GetDirection()));
-        }
-        if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
-        {
-            StartCoroutine(Attack(GetDirection()));
-            nextAttackTime = Time.time + attackCd;
+            if (rb.velocity.x < 0 ) {
+                sr.flipX = true;
+            }
+            else if (rb.velocity.x > 0) {
+                sr.flipX = false;
+            }
+            
+            dashCd -= Time.deltaTime;
+        
+            if (!isDashing)
+            {
+                Move();
+            }
+            //Change the transform.position.y to a check for collision with ground later
+            if (Input.GetKey(KeyCode.Space) && isOnGround && !isDashing)
+            {
+                Jump();
+            }
+            //Add check for if the player can dash again later
+            if (Input.GetKey("c") && dashCd <= 0 && !isAttacking)
+            {
+                dashCd = 1.5f;
+                StartCoroutine(Dash(GetDirection()));
+            }
+            if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
+            {
+                StartCoroutine(Attack(GetDirection()));
+                nextAttackTime = Time.time + attackCd;
+            }
+            if (transform.position.y < deathY)
+            {
+                Die();
+            }
         }
     }
 
     private void UpdateHud()
     {
-        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
-        float dashDisplay = (1.5f - dashCd) / 1.5f;
-        if (dashDisplay > 1) {
-            dashDisplay = 1;
+        if (alive)
+        {
+            hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
+            float dashDisplay = (1.5f - dashCd) / 1.5f;
+            if (dashDisplay > 1) {
+                dashDisplay = 1;
+            }
+            cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
         }
-        cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
+        else
+        {
+            hp.localScale = new Vector3(0, 0, 0);
+            cd.localScale = new Vector3(0, 0, 0);
+        }
     }
 
     private void Move()
@@ -109,10 +130,8 @@ public class PlayerController : MonoBehaviour
 
         }
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
-       
         
         animator.SetBool("IsRunning",isOnGround && horizontalInput != 0);
-        
     }
 
     private void Jump()
@@ -149,7 +168,7 @@ public class PlayerController : MonoBehaviour
         return result.normalized;
     }
 
-    IEnumerator TakeDamage(int dmg)
+    public IEnumerator TakeDamage(int dmg)
     {
         currentHealth -= dmg;
         if (currentHealth <= 0)
@@ -164,8 +183,15 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        GameObject canvas = GameObject.Find("Canvas");
-        canvas.SetActive(true);
+        deathUI.SetActive(true);
+        alive = false;
+        rb.velocity = new Vector2(0, 0);
+        animator.SetBool("IsRunning", false);
+    }
+
+    void Win()
+    {
+        winUI.SetActive(true);
     }
 
     IEnumerator Attack(Vector2 direction)
@@ -199,9 +225,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled))
+        if ((collision.gameObject.tag == "Ground"))
         {
             isOnGround = true;
+        }
+        if (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
+        {
+            isOnGround = true;
+        }
+        if (collision.gameObject.tag == "Trap")
+        {
+            Die();
+            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {

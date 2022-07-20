@@ -8,6 +8,8 @@ public class EyeMonster : MonoBehaviour
     public GameObject eyeMonsterProjectile;
     private Rigidbody2D eyeRb;
     private Animator eyeAnim;
+    public SpriteRenderer eyeSR; 
+  
     private bool lockedOn = false;
     public float flySpeed;
     public float attackCd;
@@ -17,11 +19,13 @@ public class EyeMonster : MonoBehaviour
     private bool goingRight = true;
     private bool goingLeft = false;
     private float timeSinceShoot = 0f;
+    public float horizontalBound = 4f;
     // Start is called before the first frame update
     void Start()
     {
         eyeRb = GetComponent<Rigidbody2D>();
         eyeAnim = GetComponent<Animator>();
+        eyeSR = GetComponent<SpriteRenderer>();
         startPos = transform.position;
     }
 
@@ -45,7 +49,7 @@ public class EyeMonster : MonoBehaviour
         eyeRb.velocity = Vector2.zero;
         eyeAnim.SetTrigger("ShootTrigger");
         isShooting = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.15f);
         Instantiate(eyeMonsterProjectile, transform.position, Quaternion.FromToRotation(Vector2.right, player.transform.position));
         isShooting = false;
     }
@@ -55,7 +59,12 @@ public class EyeMonster : MonoBehaviour
         if (goingRight)
         {
             eyeRb.velocity = new Vector2(flySpeed, 0);
+
+            if (transform.position.x > startPos.x + horizontalBound)
+
+            eyeSR.flipX = false;
             if (transform.position.x > startPos.x + 4)
+
             {
                 goingRight = false;
                 goingLeft = true;
@@ -64,7 +73,12 @@ public class EyeMonster : MonoBehaviour
         if (goingLeft)
         {
             eyeRb.velocity = new Vector2(-flySpeed, 0);
+
+            if (transform.position.x < startPos.x - horizontalBound)
+
+            eyeSR.flipX = true;
             if (transform.position.x < startPos.x - 4)
+
             {
                 goingLeft = false;
                 goingRight = true;
