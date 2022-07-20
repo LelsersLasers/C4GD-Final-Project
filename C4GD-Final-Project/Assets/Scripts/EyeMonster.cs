@@ -8,6 +8,8 @@ public class EyeMonster : MonoBehaviour
     public GameObject eyeMonsterProjectile;
     private Rigidbody2D eyeRb;
     private Animator eyeAnim;
+    public SpriteRenderer eyeSR; 
+  
     private bool lockedOn = false;
     public float flySpeed;
     public float attackCd;
@@ -22,6 +24,7 @@ public class EyeMonster : MonoBehaviour
     {
         eyeRb = GetComponent<Rigidbody2D>();
         eyeAnim = GetComponent<Animator>();
+        eyeSR = GetComponent<SpriteRenderer>();
         startPos = transform.position;
     }
 
@@ -55,6 +58,7 @@ public class EyeMonster : MonoBehaviour
         if (goingRight)
         {
             eyeRb.velocity = new Vector2(flySpeed, 0);
+            eyeSR.flipX = false;
             if (transform.position.x > startPos.x + 4)
             {
                 goingRight = false;
@@ -64,6 +68,7 @@ public class EyeMonster : MonoBehaviour
         if (goingLeft)
         {
             eyeRb.velocity = new Vector2(-flySpeed, 0);
+            eyeSR.flipX = true;
             if (transform.position.x < startPos.x - 4)
             {
                 goingLeft = false;
