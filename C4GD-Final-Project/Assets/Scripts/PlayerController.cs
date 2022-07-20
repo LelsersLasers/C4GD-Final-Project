@@ -151,15 +151,19 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator TakeDamage(int dmg)
     {
-        currentHealth -= dmg;
-        if (currentHealth <= 0)
+        if (!iFramesActive)
         {
-            currentHealth = 0;
-            Die();
+            currentHealth -= dmg;
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                Die();
+            }
+            iFramesActive = true;
+            yield return new WaitForSeconds(iFrameDuration);
+            iFramesActive = false;
+            Debug.Log("finish");
         }
-        iFramesActive = true;
-        yield return new WaitForSeconds(iFrameDuration);
-        iFramesActive = false;
     }
 
     void Die()
@@ -205,10 +209,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
-            if (!iFramesActive)
-            {
-                StartCoroutine(TakeDamage(collision.gameObject.GetComponent<Enemy>().GetDamage()));
-            }
+            StartCoroutine(TakeDamage(collision.gameObject.GetComponent<Enemy>().GetDamage()));
         }
     }
     
@@ -221,4 +222,11 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
     
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "HostileProjectile")
+        {
+            StartCoroutine(TakeDamage(2));
+        }
+    }
 }

@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Platform
   - Enemy
+  - Trap
+  - HostileProjectile
   layers:
   - Default
   - TransparentFX
