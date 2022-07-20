@@ -1577,6 +1577,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform Prefab (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8987507605616166665, guid: ba5f0062f738f3b488e0688c7bbe184f, type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba5f0062f738f3b488e0688c7bbe184f, type: 3}
 --- !u!4 &494158106 stripped
@@ -13478,6 +13482,10 @@ PrefabInstance:
     - target: {fileID: 8987507605616166665, guid: ba5f0062f738f3b488e0688c7bbe184f, type: 3}
       propertyPath: m_Name
       value: Platform Prefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8987507605616166665, guid: ba5f0062f738f3b488e0688c7bbe184f, type: 3}
+      propertyPath: m_TagString
+      value: Platform
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba5f0062f738f3b488e0688c7bbe184f, type: 3}
