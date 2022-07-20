@@ -17,6 +17,7 @@ public class EyeMonster : MonoBehaviour
     private bool goingRight = true;
     private bool goingLeft = false;
     private float timeSinceShoot = 0f;
+    public float horizontalBound = 4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +56,7 @@ public class EyeMonster : MonoBehaviour
         if (goingRight)
         {
             eyeRb.velocity = new Vector2(flySpeed, 0);
-            if (transform.position.x > startPos.x + 4)
+            if (transform.position.x > startPos.x + horizontalBound)
             {
                 goingRight = false;
                 goingLeft = true;
@@ -64,7 +65,7 @@ public class EyeMonster : MonoBehaviour
         if (goingLeft)
         {
             eyeRb.velocity = new Vector2(-flySpeed, 0);
-            if (transform.position.x < startPos.x - 4)
+            if (transform.position.x < startPos.x - horizontalBound)
             {
                 goingLeft = false;
                 goingRight = true;
