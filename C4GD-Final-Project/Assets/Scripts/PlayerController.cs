@@ -222,6 +222,10 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
+        if (collision.gameObject.tag == "Trap")
+        {
+            Die();
+        }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
             if (!iFramesActive)
