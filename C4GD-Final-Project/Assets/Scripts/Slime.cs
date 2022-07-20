@@ -71,6 +71,6 @@ public class Slime : MonoBehaviour
     }
     void Attack()
     {
-
+        slimeAnim.SetTrigger("AttackTrigger");
     }
 }

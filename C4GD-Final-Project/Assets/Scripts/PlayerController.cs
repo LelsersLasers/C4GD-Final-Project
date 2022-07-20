@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private float dashCd = 0;
     private int jumps = 0;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
     public int maxHealth;
     private int currentHealth;
     
@@ -27,11 +28,14 @@ public class PlayerController : MonoBehaviour
     private float nextAttackTime = 0f;
     public LayerMask enemyLayers;
     private float orientation = 1f;
+    public bool iFramesActive = false;
+    public float iFrameDuration = 0.2f;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         hpW = hp.localScale.x;
     }
@@ -39,6 +43,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (rb.velocity.x < 0) {
+            sr.flipX = true;
+        }
+        else if (rb.velocity.x > 0) {
+            sr.flipX = false;
+        }
         hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
         dashCd -= Time.deltaTime;
         if (!isDashing)
@@ -46,7 +56,7 @@ public class PlayerController : MonoBehaviour
             Move();
         }
         //Change the transform.position.y to a check for collision with ground later
-        if (Input.GetKeyDown(KeyCode.Space) && jumps < 1 && !isDashing)
+        if (Input.GetKey(KeyCode.Space) && jumps < 1 && !isDashing)
         {
             Jump();
         }
@@ -115,18 +125,23 @@ public class PlayerController : MonoBehaviour
         return result.normalized;
     }
 
-    void TakeDamage(int dmg)
+    IEnumerator TakeDamage(int dmg)
     {
         currentHealth -= dmg;
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             Die();
         }
+        iFramesActive = true;
+        yield return new WaitForSeconds(iFrameDuration);
+        iFramesActive = false;
     }
 
     void Die()
     {
-
+        GameObject canvas = GameObject.Find("Canvas");
+        canvas.SetActive(true);
     }
 
     IEnumerator Attack(Vector2 direction)
@@ -163,6 +178,13 @@ public class PlayerController : MonoBehaviour
         if ((collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled))
         {
             jumps = 0;
+        }
+        if (collision.gameObject.GetComponent<Enemy>() != null)
+        {
+            if (!iFramesActive)
+            {
+                StartCoroutine(TakeDamage(collision.gameObject.GetComponent<Enemy>().GetDamage()));
+            }
         }
     }
 
