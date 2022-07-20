@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
 
     public bool alive = true;
 
+    private float maxRot = 90f;
+    private float currentRot = 0;
+
     public float deathY = -25f;
     public GameObject deathUI;
     public GameObject winUI;
@@ -57,6 +60,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateHud();
         if (alive)
         {
             if (rb.velocity.x < 0 ) {
@@ -67,7 +71,6 @@ public class PlayerController : MonoBehaviour
             }
             
             dashCd -= Time.deltaTime;
-            UpdateHud();
         
             if (!isDashing)
             {
@@ -94,16 +97,33 @@ public class PlayerController : MonoBehaviour
                 Die();
             }
         }
+        else
+        {
+            currentRot += orientation * Time.deltaTime * 180f;
+            if ((orientation == 1 && currentRot > maxRot) || (orientation == -1 && currentRot < maxRot))
+            {
+                currentRot = maxRot;
+            }
+            transform.rotation = Quaternion.Euler(0, 0, currentRot);
+        }
     }
 
     private void UpdateHud()
     {
-        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
-        float dashDisplay = (1.5f - dashCd) / 1.5f;
-        if (dashDisplay > 1) {
-            dashDisplay = 1;
+        if (alive)
+        {
+            hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
+            float dashDisplay = (1.5f - dashCd) / 1.5f;
+            if (dashDisplay > 1) {
+                dashDisplay = 1;
+            }
+            cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
         }
-        cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
+        else
+        {
+            hp.localScale = new Vector3(0, 0, 0);
+            cd.localScale = new Vector3(0, 0, 0);
+        }
     }
 
     private void Move()
@@ -121,6 +141,7 @@ public class PlayerController : MonoBehaviour
             orientation = 1;
 
         }
+        maxRot = 90f * orientation;
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
        
         
@@ -180,6 +201,7 @@ public class PlayerController : MonoBehaviour
         deathUI.SetActive(true);
         alive = false;
         rb.velocity = new Vector2(0, 0);
+        animator.SetBool("IsRunning", false);
     }
 
     void Win()
