@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateHud();
         if (alive)
         {
             if (rb.velocity.x < 0 ) {
@@ -67,7 +68,6 @@ public class PlayerController : MonoBehaviour
             }
             
             dashCd -= Time.deltaTime;
-            UpdateHud();
         
             if (!isDashing)
             {
@@ -98,12 +98,20 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateHud()
     {
-        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
-        float dashDisplay = (1.5f - dashCd) / 1.5f;
-        if (dashDisplay > 1) {
-            dashDisplay = 1;
+        if (alive)
+        {
+            hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
+            float dashDisplay = (1.5f - dashCd) / 1.5f;
+            if (dashDisplay > 1) {
+                dashDisplay = 1;
+            }
+            cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
         }
-        cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
+        else
+        {
+            hp.localScale = new Vector3(0, 0, 0);
+            cd.localScale = new Vector3(0, 0, 0);
+        }
     }
 
     private void Move()
@@ -122,10 +130,8 @@ public class PlayerController : MonoBehaviour
 
         }
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
-       
         
         animator.SetBool("IsRunning",isOnGround && horizontalInput != 0);
-        
     }
 
     private void Jump()
@@ -180,6 +186,7 @@ public class PlayerController : MonoBehaviour
         deathUI.SetActive(true);
         alive = false;
         rb.velocity = new Vector2(0, 0);
+        animator.SetBool("IsRunning", false);
     }
 
     void Win()
@@ -218,13 +225,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled))
+        if ((collision.gameObject.tag == "Ground"))
+        {
+            isOnGround = true;
+        }
+        if (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
         {
             isOnGround = true;
         }
         if (collision.gameObject.tag == "Trap")
         {
             Die();
+            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
