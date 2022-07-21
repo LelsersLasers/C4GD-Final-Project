@@ -897,7 +897,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458449966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 8.54, y: 1.47, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1450,7 +1450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753057190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.52, y: 5.82, z: 0}
+  m_LocalPosition: {x: 12.52, y: 7, z: 0}
   m_LocalScale: {x: 13.017634, y: 1.0213088, z: 1.2969}
   m_Children:
   - {fileID: 1914568015}
@@ -1472,6 +1472,7 @@ MonoBehaviour:
   attackCd: 1.5
   bossFireball1: {fileID: 8597063348304242930, guid: 69f0edbf5dad6bd4294b4691466a05b1, type: 3}
   bossFireball2: {fileID: 5398089492462119363, guid: 8da3b9ef3533cef488ee0db5e8e0dfe5, type: 3}
+  bossSummon: {fileID: 89549885525600131, guid: a621a42dfa3ee694d89f75f5e68511a5, type: 3}
   leftBound: 2
   rightBound: 25
 --- !u!1 &871674693

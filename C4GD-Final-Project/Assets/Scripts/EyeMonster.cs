@@ -33,6 +33,10 @@ public class EyeMonster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<Enemy>().currentHealth <= 0)
+        {
+            this.enabled = false;
+        }
         lockedOn = Vector2.Distance(player.transform.position, transform.position) <= aggroRange;
         if (!isShooting)
         {
