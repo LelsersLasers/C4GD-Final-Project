@@ -47,3 +47,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackDropTiles
+    uniqueID: 2648106485
+    locked: 0
+  - name: PropTIles
+    uniqueID: 4277323119
+    locked: 0
+  - name: Tiles
+    uniqueID: 1476046753
+    locked: 0
+  - name: BackProps
+    uniqueID: 622885111
+    locked: 0
+  - name: Player
+    uniqueID: 1055504467
+    locked: 0
+  - name: FrontProps
+    uniqueID: 3244842533
+    locked: 0
