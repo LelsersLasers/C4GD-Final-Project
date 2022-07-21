@@ -156,8 +156,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1055504467
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 8793639957104055765, guid: c065a51e07e8f9d48b113af8240c0db3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -248,11 +248,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b44510f149949b43b4eeead6e9a0b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 10
   range: 5
   hp: {fileID: 3931290861208485940}
+  hpW: 0
   maxHealth: 12
+  currentHealth: 0
   dmg: 3
 --- !u!114 &3931290862671373450
 MonoBehaviour:
@@ -266,7 +266,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2304d15338784b241bff62d42810076d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   aggroRange: 10
   minJump: 4
   maxJump: 7
