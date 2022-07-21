@@ -9,23 +9,15 @@ public class FollowPlayer : MonoBehaviour
     public float xSpeed = 2f;
     public float ySpeed = 4f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    public Vector3 targetOffset = new Vector3(0f, 0f, -10f);
 
     // Update is called once per frame
     void LateUpdate()
     {
         Vector3 currentOffset = transform.position - player.transform.position;
-        Vector3 move = new Vector3(
-            -currentOffset.x * Time.deltaTime * xSpeed,
-            -currentOffset.y * Time.deltaTime * ySpeed,
-            0
-        );
-        // currentOffset.z = startOffset.z;
-        // currentOffset.x = startOffset.x - currentOffset.x;
-        // transform.position += (startOffset - currentOffset) * Time.deltaTime * 2f;
+        Vector3 move = (targetOffset - currentOffset) * Time.deltaTime;
+        move.x *= xSpeed;
+        move.y *= ySpeed;
         transform.position += move;
     }
 }
