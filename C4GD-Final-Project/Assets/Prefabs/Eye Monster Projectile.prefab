@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5641672774213140222}
   m_Layer: 0
   m_Name: Eye Monster Projectile
-  m_TagString: HostileProjectile
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,5 +164,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc56ffb62da10b4ea9f683e97bf9730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projSpeed: 10
-  dmg: 2
+  projSpeed: 8

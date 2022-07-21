@@ -28,7 +28,10 @@ public class EyeMonsterProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ground")
         {
-            StartCoroutine(Explode());  
+            hasCollided = true;
+            projAnim.SetTrigger("HitTrigger");
+            yield return new WaitForSeconds(1);
+            Destroy(gameObject);
         }
     }
 }

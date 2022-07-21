@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd934b6d15af604cb40a8c6cd5d7bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteRenderer: {fileID: 0}
+  SpriteRenderer: {fileID: 3776250456493509355}
   speed: 6
   jumpSpeed: 12
   dashSpeed: 16
@@ -266,6 +266,7 @@ MonoBehaviour:
   maxHealth: 10
   attackPoint: {fileID: 3776250455340014199}
   hp: {fileID: 3776250454957391975}
+  cd: {fileID: 3776250456493509396}
   attackRange: 0.4
   attackCd: 1
   enemyLayers:
