@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     public SpriteRenderer SpriteRenderer; 
     public float speed = 6f;
-    public float jumpSpeed = 12f;
-    public float dashSpeed = 16f;
+    public float jumpSpeed = 16f;
+    public float dashSpeed = 20f;
     public int damage = 5;
     private bool isDashing = false;
     private bool isAttacking = false;
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
             //Add check for if the player can dash again later
-            if (Input.GetKey("c") && dashCd <= 0 && !isAttacking)
+            if ((Input.GetKey("c") || Input.GetKey(KeyCode.LeftShift)) && dashCd <= 0 && !isAttacking)
             {
                 dashCd = 1.5f;
                 StartCoroutine(Dash(GetDirection()));
@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         isDashing = false;
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 5);
-        rb.gravityScale = 2.4f;
+        rb.gravityScale = 4.0f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
