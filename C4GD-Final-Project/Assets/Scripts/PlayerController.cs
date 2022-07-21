@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
     private bool isAttacking = false;
     private float dashCd = 0;
+    private float orientation = 1f;
 
     public bool alive = true;
 
@@ -119,10 +120,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
             horizontalInput = -1;
+            orientation = -1;
         }
         if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
             horizontalInput = 1;
+            orientation = 1;
         }
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
         
@@ -158,7 +161,7 @@ public class PlayerController : MonoBehaviour
         }
         if (result == Vector2.zero)
         {
-            return transform.right;
+            return transform.right * orientation;
         }
         return result.normalized;
     }

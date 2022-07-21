@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private GameObject player;
-    public float speed = 10f;
     public float range = 5f;
 
     private Rigidbody2D rb;
