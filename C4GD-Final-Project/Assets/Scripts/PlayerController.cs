@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
     public float attackCd = 1.0f;
     private float nextAttackTime = 0f;
     public LayerMask enemyLayers;
-    private float orientation = 1f;
     public bool iFramesActive = false;
     public float iFrameDuration = 0.5f;
     private bool isOnGround = true;
@@ -119,15 +118,11 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = 0;
         if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
-            
             horizontalInput = -1;
-            orientation = -1;
         }
         if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
             horizontalInput = 1;
-            orientation = 1;
-
         }
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
         
@@ -163,7 +158,7 @@ public class PlayerController : MonoBehaviour
         }
         if (result == Vector2.zero)
         {
-            return new Vector2(orientation,0);
+            return transform.right;
         }
         return result.normalized;
     }
@@ -181,7 +176,6 @@ public class PlayerController : MonoBehaviour
             iFramesActive = true;
             yield return new WaitForSeconds(iFrameDuration);
             iFramesActive = false;
-            Debug.Log("finish");
         }
     }
 
@@ -201,10 +195,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator Attack(Vector2 direction)
     {
         //Set trigger for animator once we have animations
-
+        /*
         attackPoint.RotateAround(transform.position, new Vector3(0,0,1), Vector2.SignedAngle(new Vector2(1,0), direction));
+        */
+        attackPoint.position = transform.position + new Vector3(direction.x * 1.5f, direction.y * 1.5f, 0);
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
         foreach (Collider2D target in hitTargets)
         {
             target.GetComponent<Enemy>().TakeDamage(damage);
@@ -212,7 +207,8 @@ public class PlayerController : MonoBehaviour
         //Time should be as long as the attack animation
         isAttacking = true;
         yield return new WaitForSeconds(0.2f);
-        attackPoint.RotateAround(transform.position, new Vector3(0, 0, 1), -Vector2.SignedAngle(new Vector2(1, 0), direction));
+        attackPoint.position = transform.position;
+        Debug.Log("Done" + Time.time);
         isAttacking = false;
     }
 
