@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
 
     public bool alive = true;
 
+    private float maxRot = 90f;
+    private float currentRot = 0f;
+
     public float deathY = -25f;
     public GameObject deathUI;
     public GameObject winUI;
@@ -99,6 +102,14 @@ public class PlayerController : MonoBehaviour
                 Die();
             }
         }
+        else {
+            currentRot += orientation * Time.deltaTime * 180f;
+            if ((orientation == 1 && currentRot > maxRot) || (orientation == -1 && currentRot < maxRot))
+            {
+                currentRot = maxRot;
+            }
+            transform.rotation = Quaternion.Euler(0, 0, currentRot);
+        }
     }
 
     private void UpdateHud()
@@ -132,6 +143,7 @@ public class PlayerController : MonoBehaviour
             horizontalInput = 1;
             orientation = 1;
         }
+        maxRot = 90f * orientation;
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
         
         animator.SetBool("IsRunning",isOnGround && horizontalInput != 0);
