@@ -45,3 +45,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 4284009465
+    locked: 0
+  - name: TileFluf
+    uniqueID: 4116579687
+    locked: 0
+  - name: Tiles
+    uniqueID: 2456007859
+    locked: 0
+  - name: BackProps
+    uniqueID: 1794805219
+    locked: 0
+  - name: Player
+    uniqueID: 2748383501
+    locked: 0
+  - name: FrontProps
+    uniqueID: 461743543
+    locked: 0
+  - name: UI
+    uniqueID: 481402785
+    locked: 0

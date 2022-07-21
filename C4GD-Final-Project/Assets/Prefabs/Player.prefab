@@ -188,7 +188,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 132542bc5c2aafb42ab371c90778812b, type: 3}
+  m_Sprite: {fileID: 5807470255781885529, guid: 218ca3cb2ba7e1f4a9fcc4afef5c56f9, type: 3}
   m_Color: {r: 0.6392157, g: 0.74509805, b: 0.54901963, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -196,7 +196,7 @@ SpriteRenderer:
   m_Size: {x: 0.9, y: 0.9}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &3776250456493509354
@@ -263,10 +263,18 @@ MonoBehaviour:
   jumpSpeed: 12
   dashSpeed: 16
   damage: 5
+  alive: 1
+  deathY: -25
+  deathUI: {fileID: 0}
+  winUI: {fileID: 0}
   maxHealth: 10
   attackPoint: {fileID: 3776250455340014199}
   hp: {fileID: 3776250454957391975}
+<<<<<<< Updated upstream
   cd: {fileID: 3776250456493509396}
+=======
+  cd: {fileID: 0}
+>>>>>>> Stashed changes
   attackRange: 0.4
   attackCd: 1
   enemyLayers:
