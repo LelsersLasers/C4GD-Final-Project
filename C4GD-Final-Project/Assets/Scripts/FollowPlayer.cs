@@ -5,19 +5,27 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public GameObject player;
-    private Vector3 startOffset;
+
+    public float xSpeed = 2f;
+    public float ySpeed = 4f;
+
     // Start is called before the first frame update
     void Start()
     {
-        startOffset = transform.position - player.transform.position;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         Vector3 currentOffset = transform.position - player.transform.position;
-        currentOffset.z = startOffset.z;
-        transform.position += (startOffset - currentOffset) * Time.deltaTime * 2f;
-
+        Vector3 move = new Vector3(
+            -currentOffset.x * Time.deltaTime * xSpeed,
+            -currentOffset.y * Time.deltaTime * ySpeed,
+            0
+        );
+        // currentOffset.z = startOffset.z;
+        // currentOffset.x = startOffset.x - currentOffset.x;
+        // transform.position += (startOffset - currentOffset) * Time.deltaTime * 2f;
+        transform.position += move;
     }
 }
