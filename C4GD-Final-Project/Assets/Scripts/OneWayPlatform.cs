@@ -21,7 +21,7 @@ public class OneWayPlatform : MonoBehaviour
         Rigidbody2D playerRb = player.GetComponent<Rigidbody2D>();
         activateDelay -= Time.deltaTime;
         if (Input.GetKey(KeyCode.DownArrow)) {
-            activateDelay = 0.5f;
+            activateDelay = 0.1f;
         }
         bc.enabled = playerRb.velocity.y <= 0 && activateDelay < 0;
     }

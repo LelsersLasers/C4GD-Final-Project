@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource audioSource;
     public AudioClip attackSound;
+    public AudioClip jumpSound;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -138,6 +139,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        audioSource.PlayOneShot(jumpSound, 1f);
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         isOnGround = false;
     }
