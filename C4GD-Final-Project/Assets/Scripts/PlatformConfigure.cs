@@ -21,6 +21,6 @@ public class PlatformConfigure : MonoBehaviour
 
         BoxCollider2D bc = GetComponent<BoxCollider2D>();
         bc.size = new Vector2(distance + 2f, 0.15f);
-        bc.offset = new Vector2(bc.size.x / 2f, -8.9f);
+        bc.offset = new Vector2(bc.size.x / 2f, 0f);
     }
 }

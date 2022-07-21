@@ -7,18 +7,26 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     public SpriteRenderer SpriteRenderer; 
     public float speed = 6f;
-    public float jumpSpeed = 12f;
-    public float dashSpeed = 16f;
+    public float jumpSpeed = 16f;
+    public float dashSpeed = 20f;
     public int damage = 5;
     private bool isDashing = false;
     private bool isAttacking = false;
     private float dashCd = 0;
+    private float orientation = 1f;
 
     public bool alive = true;
+
+    private float maxRot = 90f;
+    private float currentRot = 0f;
 
     public float deathY = -25f;
     public GameObject deathUI;
     public GameObject winUI;
+
+    private AudioSource audioSource;
+    public AudioClip attackSound;
+    public AudioClip jumpSound;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -38,7 +46,6 @@ public class PlayerController : MonoBehaviour
     public float attackCd = 1.0f;
     private float nextAttackTime = 0f;
     public LayerMask enemyLayers;
-    private float orientation = 1f;
     public bool iFramesActive = false;
     public float iFrameDuration = 0.5f;
     private bool isOnGround = true;
@@ -49,6 +56,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
         hpW = hp.localScale.x;
         cdW = cd.localScale.x;
@@ -79,7 +87,7 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
             //Add check for if the player can dash again later
-            if (Input.GetKey("c") && dashCd <= 0 && !isAttacking)
+            if ((Input.GetKey("c") || Input.GetKey(KeyCode.LeftShift)) && dashCd <= 0 && !isAttacking)
             {
                 dashCd = 1.5f;
                 StartCoroutine(Dash(GetDirection()));
@@ -93,6 +101,14 @@ public class PlayerController : MonoBehaviour
             {
                 Die();
             }
+        }
+        else {
+            currentRot += orientation * Time.deltaTime * 180f;
+            if ((orientation == 1 && currentRot > maxRot) || (orientation == -1 && currentRot < maxRot))
+            {
+                currentRot = maxRot;
+            }
+            transform.rotation = Quaternion.Euler(0, 0, currentRot);
         }
     }
 
@@ -119,7 +135,6 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = 0;
         if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
-            
             horizontalInput = -1;
             orientation = -1;
         }
@@ -127,8 +142,8 @@ public class PlayerController : MonoBehaviour
         {
             horizontalInput = 1;
             orientation = 1;
-
         }
+        maxRot = 90f * orientation;
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
         
         animator.SetBool("IsRunning",isOnGround && horizontalInput != 0);
@@ -136,6 +151,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        audioSource.PlayOneShot(jumpSound, 1f);
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         isOnGround = false;
     }
@@ -163,7 +179,7 @@ public class PlayerController : MonoBehaviour
         }
         if (result == Vector2.zero)
         {
-            return new Vector2(orientation,0);
+            return transform.right * orientation;
         }
         return result.normalized;
     }
@@ -181,7 +197,6 @@ public class PlayerController : MonoBehaviour
             iFramesActive = true;
             yield return new WaitForSeconds(iFrameDuration);
             iFramesActive = false;
-            Debug.Log("finish");
         }
     }
 
@@ -200,11 +215,13 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Attack(Vector2 direction)
     {
+        audioSource.PlayOneShot(attackSound, 1f);
         //Set trigger for animator once we have animations
-
+        /*
         attackPoint.RotateAround(transform.position, new Vector3(0,0,1), Vector2.SignedAngle(new Vector2(1,0), direction));
+        */
+        attackPoint.position = transform.position + new Vector3(direction.x * 1.2f, direction.y * 1.2f, 0);
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
         foreach (Collider2D target in hitTargets)
         {
             target.GetComponent<Enemy>().TakeDamage(damage);
@@ -212,7 +229,8 @@ public class PlayerController : MonoBehaviour
         //Time should be as long as the attack animation
         isAttacking = true;
         yield return new WaitForSeconds(0.2f);
-        attackPoint.RotateAround(transform.position, new Vector3(0, 0, 1), -Vector2.SignedAngle(new Vector2(1, 0), direction));
+        attackPoint.position = transform.position;
+        Debug.Log("Done" + Time.time);
         isAttacking = false;
     }
 
@@ -224,7 +242,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         isDashing = false;
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 5);
-        rb.gravityScale = 2.4f;
+        rb.gravityScale = 4.0f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

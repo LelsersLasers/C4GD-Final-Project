@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject player;
-    public float speed = 10f;
+    private GameObject player;
     public float range = 5f;
 
     private Rigidbody2D rb;
@@ -26,6 +25,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         startColor = sr.color;
         hpW = hp.localScale.x;
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EyeMonster : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     public GameObject eyeMonsterProjectile;
     private Rigidbody2D eyeRb;
     private Animator eyeAnim;
@@ -27,6 +27,7 @@ public class EyeMonster : MonoBehaviour
         eyeAnim = GetComponent<Animator>();
         eyeSR = GetComponent<SpriteRenderer>();
         startPos = transform.position;
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -49,7 +50,7 @@ public class EyeMonster : MonoBehaviour
         eyeRb.velocity = Vector2.zero;
         eyeAnim.SetTrigger("ShootTrigger");
         isShooting = true;
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.45f);
         Instantiate(eyeMonsterProjectile, transform.position, Quaternion.FromToRotation(Vector2.right, player.transform.position));
         isShooting = false;
     }
