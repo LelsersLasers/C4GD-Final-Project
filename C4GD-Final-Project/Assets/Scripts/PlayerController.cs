@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip attackSound;
     public AudioClip jumpSound;
+    public AudioClip dashSound;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -237,6 +238,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash(Vector2 direction)
     {
+        audioSource.PlayOneShot(dashSound, 0.1f);
         rb.velocity = direction * dashSpeed;
         isDashing = true;
         rb.gravityScale = 0f;
