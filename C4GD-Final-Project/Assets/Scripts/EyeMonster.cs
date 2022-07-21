@@ -67,7 +67,6 @@ public class EyeMonster : MonoBehaviour
             eyeRb.velocity = new Vector2(flySpeed, 0);
             eyeSR.flipX = false;
             if (transform.position.x > startPos.x + horizontalBound)
-
             {
                 goingRight = false;
                 goingLeft = true;
