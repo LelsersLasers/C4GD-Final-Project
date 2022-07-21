@@ -181,7 +181,6 @@ public class PlayerController : MonoBehaviour
             iFramesActive = true;
             yield return new WaitForSeconds(iFrameDuration);
             iFramesActive = false;
-            Debug.Log("finish");
         }
     }
 

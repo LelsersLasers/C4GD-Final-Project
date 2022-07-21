@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
 
     public float xSpeed = 2f;
     public float ySpeed = 4f;
@@ -12,6 +12,7 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
