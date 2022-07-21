@@ -16,7 +16,7 @@ public class EyeMonsterProjectile : MonoBehaviour
     {
         projAnim = GetComponent<Animator>();
         projRb = GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player 1");
         playerC = player.GetComponent<PlayerController>();
         spawnTime = Time.time;
         projRb.AddForce(-(transform.position - player.transform.position).normalized * projSpeed, ForceMode2D.Impulse);
