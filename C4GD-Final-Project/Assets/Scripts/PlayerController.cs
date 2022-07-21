@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip attackSound;
     public AudioClip jumpSound;
+    public AudioClip dashSound;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -230,12 +232,12 @@ public class PlayerController : MonoBehaviour
         isAttacking = true;
         yield return new WaitForSeconds(0.2f);
         attackPoint.position = transform.position;
-        Debug.Log("Done" + Time.time);
         isAttacking = false;
     }
 
     private IEnumerator Dash(Vector2 direction)
     {
+        audioSource.PlayOneShot(dashSound, 0.1f);
         rb.velocity = direction * dashSpeed;
         isDashing = true;
         rb.gravityScale = 0f;
@@ -251,14 +253,18 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
-        if (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
+        else if (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
         {
             isOnGround = true;
         }
-        if (collision.gameObject.tag == "Trap")
+        else if (collision.gameObject.tag == "Trap")
         {
             Die();
             collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        else if (collision.gameObject.tag == "BossRoom")
+        {
+            SceneManager.LoadScene("TavernFight");
         }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {

@@ -11,10 +11,12 @@ public class Boss : MonoBehaviour
     public float attackCd;
     public GameObject bossFireball1;
     public GameObject bossFireball2;
+    public GameObject bossSummon;
     private float timeSinceAttack = 0f;
     public float leftBound;
     public float rightBound;
     private int attackChooser = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,14 +35,18 @@ public class Boss : MonoBehaviour
         }
         if (Time.time > timeSinceAttack)
         {
-            attackChooser = Random.Range(0, 2);
-            if (attackChooser == 0)
+            attackChooser = Random.Range(0, 9);
+            if (attackChooser <= 3)
             {
                 AttackOne();
             }
-            else if (attackChooser == 1)
+            else if (attackChooser <= 7)
             {
                 AttackTwo();
+            }
+            else
+            {
+                AttackThree();
             }
             timeSinceAttack = Time.time + attackCd;
         }
@@ -67,8 +73,13 @@ public class Boss : MonoBehaviour
         }
         for (int i = 0; i < 3; i++)
         {
-            Instantiate(bossFireball2, player.transform.position + new Vector3(12 * leftOrRight, player.transform.position.y + yOffset + i, 0), bossFireball2.transform.rotation);
-            Instantiate(bossFireball2, player.transform.position + new Vector3(-12 * leftOrRight, player.transform.position.y + yOffset - i, 0), bossFireball2.transform.rotation);
+            Instantiate(bossFireball2, player.transform.position + new Vector3(15 * leftOrRight, player.transform.position.y + yOffset + i, 0), bossFireball2.transform.rotation);
+            Instantiate(bossFireball2, player.transform.position + new Vector3(-15 * leftOrRight, player.transform.position.y + yOffset - i, 0), bossFireball2.transform.rotation);
         }
+    }
+
+    void AttackThree()
+    {
+        Instantiate(bossSummon, new Vector3((leftBound + rightBound) / 2, 3, 0), bossSummon.transform.rotation);
     }
 }

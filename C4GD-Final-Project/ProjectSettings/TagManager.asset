@@ -10,11 +10,12 @@ TagManager:
   - Enemy
   - Trap
   - HostileProjectile
+  - BossRoom
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
   - 

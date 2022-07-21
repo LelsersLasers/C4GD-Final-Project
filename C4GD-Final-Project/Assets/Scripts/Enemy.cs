@@ -12,10 +12,10 @@ public class Enemy : MonoBehaviour
     private Color startColor;
 
     public Transform hp;
-    private float hpW;
+    public float hpW;
 
     public int maxHealth;
-    private int currentHealth;
+    public int currentHealth;
     public int dmg;
     // Start is called before the first frame update
     void Start()
@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int dmg)
+    public virtual void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
         if (currentHealth <= 0)
@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Die()
+    public virtual void Die()
     {
         //Set death animation later
         sr.color = Color.red;
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(DelayedDestory());
     }
 
-    private IEnumerator DelayedDestory()
+    public IEnumerator DelayedDestory()
     {
         yield return new WaitForSeconds(4f);
         Destroy(gameObject);

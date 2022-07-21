@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossFireball2 : MonoBehaviour
 {
-    public GameObject boss;
+    private GameObject boss;
     private Animator projAnim;
     private Rigidbody2D projRb;
     private GameObject player;

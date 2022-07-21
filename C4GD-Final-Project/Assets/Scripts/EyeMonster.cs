@@ -33,6 +33,11 @@ public class EyeMonster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<Enemy>().currentHealth <= 0)
+        {
+            eyeRb.velocity = Vector2.zero;
+            this.enabled = false;
+        }
         lockedOn = Vector2.Distance(player.transform.position, transform.position) <= aggroRange;
         if (!isShooting)
         {
@@ -60,11 +65,8 @@ public class EyeMonster : MonoBehaviour
         if (goingRight)
         {
             eyeRb.velocity = new Vector2(flySpeed, 0);
-
-            if (transform.position.x > startPos.x + horizontalBound)
-
             eyeSR.flipX = false;
-            if (transform.position.x > startPos.x + 4)
+            if (transform.position.x > startPos.x + horizontalBound)
 
             {
                 goingRight = false;
@@ -74,12 +76,8 @@ public class EyeMonster : MonoBehaviour
         if (goingLeft)
         {
             eyeRb.velocity = new Vector2(-flySpeed, 0);
-
-            if (transform.position.x < startPos.x - horizontalBound)
-
             eyeSR.flipX = true;
-            if (transform.position.x < startPos.x - 4)
-
+            if (transform.position.x < startPos.x - horizontalBound)
             {
                 goingLeft = false;
                 goingRight = true;
