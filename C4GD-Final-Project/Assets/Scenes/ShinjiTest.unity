@@ -1045,7 +1045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 834008899968287037, guid: d625dfac5230ba74c8c7e4b13b2d3893, type: 3}
       propertyPath: attackRange
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 834008899968287037, guid: d625dfac5230ba74c8c7e4b13b2d3893, type: 3}
       propertyPath: iFrameDuration

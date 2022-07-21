@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
         /*
         attackPoint.RotateAround(transform.position, new Vector3(0,0,1), Vector2.SignedAngle(new Vector2(1,0), direction));
         */
-        attackPoint.position = transform.position + new Vector3(direction.x * 1.5f, direction.y * 1.5f, 0);
+        attackPoint.position = transform.position + new Vector3(direction.x * 1.2f, direction.y * 1.2f, 0);
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D target in hitTargets)
         {
