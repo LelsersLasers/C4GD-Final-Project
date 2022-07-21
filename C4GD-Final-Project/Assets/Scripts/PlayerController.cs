@@ -14,12 +14,6 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false;
     private float dashCd = 0;
 
-    public bool alive = true;
-
-    public float deathY = -25f;
-    public GameObject deathUI;
-    public GameObject winUI;
-
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     public int maxHealth;
@@ -57,61 +51,46 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateHud();
-        if (alive)
-        {
-            if (rb.velocity.x < 0 ) {
-                sr.flipX = true;
-            }
-            else if (rb.velocity.x > 0) {
-                sr.flipX = false;
-            }
-            
-            dashCd -= Time.deltaTime;
+        if (rb.velocity.x < 0 ) {
+            sr.flipX = true;
+        }
+        else if (rb.velocity.x > 0) {
+            sr.flipX = false;
+        }
         
-            if (!isDashing)
-            {
-                Move();
-            }
-            //Change the transform.position.y to a check for collision with ground later
-            if (Input.GetKey(KeyCode.Space) && isOnGround && !isDashing)
-            {
-                Jump();
-            }
-            //Add check for if the player can dash again later
-            if (Input.GetKey("c") && dashCd <= 0 && !isAttacking)
-            {
-                dashCd = 1.5f;
-                StartCoroutine(Dash(GetDirection()));
-            }
-            if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
-            {
-                StartCoroutine(Attack(GetDirection()));
-                nextAttackTime = Time.time + attackCd;
-            }
-            if (transform.position.y < deathY)
-            {
-                Die();
-            }
+        dashCd -= Time.deltaTime;
+        UpdateHud();
+       
+        if (!isDashing)
+        {
+            Move();
+        }
+        //Change the transform.position.y to a check for collision with ground later
+        if (Input.GetKey(KeyCode.Space) && isOnGround && !isDashing)
+        {
+            Jump();
+        }
+        //Add check for if the player can dash again later
+        if (Input.GetKey("c") && dashCd <= 0 && !isAttacking)
+        {
+            dashCd = 1.5f;
+            StartCoroutine(Dash(GetDirection()));
+        }
+        if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
+        {
+            StartCoroutine(Attack(GetDirection()));
+            nextAttackTime = Time.time + attackCd;
         }
     }
 
     private void UpdateHud()
     {
-        if (alive)
-        {
-            hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
-            float dashDisplay = (1.5f - dashCd) / 1.5f;
-            if (dashDisplay > 1) {
-                dashDisplay = 1;
-            }
-            cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
+        hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
+        float dashDisplay = (1.5f - dashCd) / 1.5f;
+        if (dashDisplay > 1) {
+            dashDisplay = 1;
         }
-        else
-        {
-            hp.localScale = new Vector3(0, 0, 0);
-            cd.localScale = new Vector3(0, 0, 0);
-        }
+        cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
     }
 
     private void Move()
@@ -130,8 +109,10 @@ public class PlayerController : MonoBehaviour
 
         }
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
+       
         
         animator.SetBool("IsRunning",isOnGround && horizontalInput != 0);
+        
     }
 
     private void Jump()
@@ -168,30 +149,27 @@ public class PlayerController : MonoBehaviour
         return result.normalized;
     }
 
-    public IEnumerator TakeDamage(int dmg)
+    IEnumerator TakeDamage(int dmg)
     {
-        currentHealth -= dmg;
-        if (currentHealth <= 0)
+        if (!iFramesActive)
         {
-            currentHealth = 0;
-            Die();
+            currentHealth -= dmg;
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                Die();
+            }
+            iFramesActive = true;
+            yield return new WaitForSeconds(iFrameDuration);
+            iFramesActive = false;
+            Debug.Log("finish");
         }
-        iFramesActive = true;
-        yield return new WaitForSeconds(iFrameDuration);
-        iFramesActive = false;
     }
 
     void Die()
     {
-        deathUI.SetActive(true);
-        alive = false;
-        rb.velocity = new Vector2(0, 0);
-        animator.SetBool("IsRunning", false);
-    }
-
-    void Win()
-    {
-        winUI.SetActive(true);
+        GameObject canvas = GameObject.Find("Canvas");
+        canvas.SetActive(true);
     }
 
     IEnumerator Attack(Vector2 direction)
@@ -225,25 +203,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "Ground"))
+        if ((collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled))
         {
             isOnGround = true;
-        }
-        if (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
-        {
-            isOnGround = true;
-        }
-        if (collision.gameObject.tag == "Trap")
-        {
-            Die();
-            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
-            if (!iFramesActive)
-            {
-                StartCoroutine(TakeDamage(collision.gameObject.GetComponent<Enemy>().GetDamage()));
-            }
+            StartCoroutine(TakeDamage(collision.gameObject.GetComponent<Enemy>().GetDamage()));
         }
     }
     
@@ -256,4 +222,11 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
     
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "HostileProjectile")
+        {
+            StartCoroutine(TakeDamage(2));
+        }
+    }
 }

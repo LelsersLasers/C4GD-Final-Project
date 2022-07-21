@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - Enemy
   - Trap
+  - HostileProjectile
   layers:
   - Default
   - TransparentFX
