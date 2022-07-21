@@ -6124,6 +6124,10 @@ PrefabInstance:
       value: Eye Monster (2)
       objectReference: {fileID: 0}
     - target: {fileID: 89549885525600157, guid: a621a42dfa3ee694d89f75f5e68511a5, type: 3}
+      propertyPath: dmg
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 89549885525600157, guid: a621a42dfa3ee694d89f75f5e68511a5, type: 3}
       propertyPath: maxHealth
       value: 10
       objectReference: {fileID: 0}
@@ -23171,6 +23175,10 @@ PrefabInstance:
       value: Eye Monster (1)
       objectReference: {fileID: 0}
     - target: {fileID: 89549885525600157, guid: a621a42dfa3ee694d89f75f5e68511a5, type: 3}
+      propertyPath: dmg
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 89549885525600157, guid: a621a42dfa3ee694d89f75f5e68511a5, type: 3}
       propertyPath: maxHealth
       value: 10
       objectReference: {fileID: 0}
@@ -25528,6 +25536,10 @@ PrefabInstance:
     - target: {fileID: 89549885525600131, guid: a621a42dfa3ee694d89f75f5e68511a5, type: 3}
       propertyPath: m_Name
       value: Eye Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: 89549885525600157, guid: a621a42dfa3ee694d89f75f5e68511a5, type: 3}
+      propertyPath: dmg
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 89549885525600157, guid: a621a42dfa3ee694d89f75f5e68511a5, type: 3}
       propertyPath: maxHealth
