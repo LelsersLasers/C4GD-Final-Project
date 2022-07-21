@@ -28,7 +28,7 @@ public class EyeMonsterProjectile : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Ground")
         {
-            StartCoroutine(Explode());  
+            StartCoroutine(Explode());
         }
     }
 }
