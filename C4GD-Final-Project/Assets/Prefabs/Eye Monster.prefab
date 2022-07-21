@@ -243,12 +243,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89549885525600131}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b44510f149949b43b4eeead6e9a0b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 834008899968287034, guid: d625dfac5230ba74c8c7e4b13b2d3893, type: 3}
   speed: 10
   range: 5
   hp: {fileID: 89549883822220891}
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f4e823e3f682944ada111ff3116c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 834008899968287034, guid: d625dfac5230ba74c8c7e4b13b2d3893, type: 3}
   eyeMonsterProjectile: {fileID: 8597063348304242930, guid: 69f0edbf5dad6bd4294b4691466a05b1, type: 3}
   eyeSR: {fileID: 0}
   flySpeed: 6
