@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: d1dc15176e9663b48a50613260770974
+  - enabled: 1
+    path: Assets/Scenes/TavernFight.unity
+    guid: 1567733c74b7f614787a2e942d7c5e90
   m_configObjects: {}

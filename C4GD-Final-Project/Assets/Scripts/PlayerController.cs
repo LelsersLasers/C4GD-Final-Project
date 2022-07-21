@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -251,14 +252,18 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
-        if (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
+        else if (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
         {
             isOnGround = true;
         }
-        if (collision.gameObject.tag == "Trap")
+        else if (collision.gameObject.tag == "Trap")
         {
             Die();
             collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        else if (collision.gameObject.tag == "BossRoom")
+        {
+            SceneManager.LoadScene("TavernFight");
         }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {
