@@ -241,6 +241,26 @@ public class PlayerController : MonoBehaviour
         rb.velocity = direction * dashSpeed;
         isDashing = true;
         rb.gravityScale = 0f;
+        if (direction == new Vector2(1, 1).normalized || direction == new Vector2(-1, 1).normalized)
+        {
+            animator.SetTrigger("DashUFTrigger");
+        }
+        else if (direction == new Vector2(1, 0).normalized || direction == new Vector2(-1, 0).normalized)
+        {
+            animator.SetTrigger("DashFTrigger");
+        }
+        else if (direction == new Vector2(1, -1).normalized || direction == new Vector2(-1, -1).normalized)
+        {
+            animator.SetTrigger("DashDFTrigger");
+        }
+        else if (direction == new Vector2(0, 1).normalized)
+        {
+            animator.SetTrigger("DashUTrigger");
+        }
+        else if (direction == new Vector2(0, -1).normalized)
+        {
+            animator.SetTrigger("DashDTrigger");
+        }
         yield return new WaitForSeconds(0.15f);
         isDashing = false;
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 5);
