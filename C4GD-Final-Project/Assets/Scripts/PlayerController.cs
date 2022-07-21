@@ -102,8 +102,8 @@ public class PlayerController : MonoBehaviour
         {
             hp.localScale = new Vector3(hpW * ((float)currentHealth / maxHealth), hp.localScale.y, hp.localScale.z);
             float dashDisplay = (1.5f - dashCd) / 1.5f;
-            if (dashDisplay > 1) {
-                dashDisplay = 1;
+            if (dashDisplay >= 1) {
+                dashDisplay = 0;
             }
             cd.localScale = new Vector3(cdW * dashDisplay, cd.localScale.y, cd.localScale.z);
         }
