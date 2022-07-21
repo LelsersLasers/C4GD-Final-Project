@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class PlayerController : MonoBehaviour
 
     public bool alive = true;
 
+    private float maxRot = 90f;
+    private float currentRot = 0f;
+
     public float deathY = -25f;
     public GameObject deathUI;
     public GameObject winUI;
@@ -24,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip attackSound;
     public AudioClip jumpSound;
+    public AudioClip dashSound;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -99,6 +104,14 @@ public class PlayerController : MonoBehaviour
                 Die();
             }
         }
+        else {
+            currentRot += orientation * Time.deltaTime * 180f;
+            if ((orientation == 1 && currentRot > maxRot) || (orientation == -1 && currentRot < maxRot))
+            {
+                currentRot = maxRot;
+            }
+            transform.rotation = Quaternion.Euler(0, 0, currentRot);
+        }
     }
 
     private void UpdateHud()
@@ -132,6 +145,7 @@ public class PlayerController : MonoBehaviour
             horizontalInput = 1;
             orientation = 1;
         }
+        maxRot = 90f * orientation;
         rb.velocity = new Vector2(speed * horizontalInput, rb.velocity.y);
         
         animator.SetBool("IsRunning",isOnGround && horizontalInput != 0);
@@ -223,6 +237,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash(Vector2 direction)
     {
+        audioSource.PlayOneShot(dashSound, 0.1f);
         rb.velocity = direction * dashSpeed;
         isDashing = true;
         rb.gravityScale = 0f;
@@ -238,14 +253,18 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
         }
-        if (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
+        else if (collision.gameObject.tag == "Platform" && collision.gameObject.GetComponent<BoxCollider2D>().enabled)
         {
             isOnGround = true;
         }
-        if (collision.gameObject.tag == "Trap")
+        else if (collision.gameObject.tag == "Trap")
         {
             Die();
             collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        else if (collision.gameObject.tag == "BossRoom")
+        {
+            SceneManager.LoadScene("TavernFight");
         }
         if (collision.gameObject.GetComponent<Enemy>() != null)
         {

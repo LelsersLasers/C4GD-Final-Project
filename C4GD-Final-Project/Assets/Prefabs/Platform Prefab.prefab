@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8987507605031384652}
   m_Layer: 9
   m_Name: Platform Right
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -608648129
-  m_SortingLayer: 0
+  m_SortingLayerID: -1050124763
+  m_SortingLayer: 6
   m_SortingOrder: 8
   m_Sprite: {fileID: 21300224, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -146,7 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0469c20f4f15c43aa7ba44507ebadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 834008899968287034, guid: d625dfac5230ba74c8c7e4b13b2d3893, type: 3}
 --- !u!61 &3369222694019484623
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -185,7 +184,7 @@ GameObject:
   - component: {fileID: 8987507605682049217}
   m_Layer: 9
   m_Name: Platform Middle
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,8 +240,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -608648129
-  m_SortingLayer: 0
+  m_SortingLayerID: -1050124763
+  m_SortingLayer: 6
   m_SortingOrder: 8
   m_Sprite: {fileID: 21300222, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -267,7 +266,7 @@ GameObject:
   - component: {fileID: 8987507606322057311}
   m_Layer: 9
   m_Name: Platform Left
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -323,8 +322,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -608648129
-  m_SortingLayer: 0
+  m_SortingLayerID: -1050124763
+  m_SortingLayer: 6
   m_SortingOrder: 8
   m_Sprite: {fileID: 21300220, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
