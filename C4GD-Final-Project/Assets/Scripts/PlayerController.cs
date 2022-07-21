@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     public GameObject deathUI;
     public GameObject winUI;
 
+    private AudioSource audioSource;
+    public AudioClip attackSound;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     public int maxHealth;
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
         hpW = hp.localScale.x;
         cdW = cd.localScale.x;
@@ -197,6 +201,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Attack(Vector2 direction)
     {
+        audioSource.PlayOneShot(attackSound, 1f);
         //Set trigger for animator once we have animations
         /*
         attackPoint.RotateAround(transform.position, new Vector3(0,0,1), Vector2.SignedAngle(new Vector2(1,0), direction));
