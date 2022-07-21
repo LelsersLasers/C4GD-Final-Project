@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Slime : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     private bool lockedOn;
     public float aggroRange;
     public float minJump;
@@ -22,6 +22,7 @@ public class Slime : MonoBehaviour
     {
         slimeRb = GetComponent<Rigidbody2D>();
         slimeAnim = GetComponent<Animator>();
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
