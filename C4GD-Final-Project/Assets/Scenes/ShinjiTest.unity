@@ -328,7 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0469c20f4f15c43aa7ba44507ebadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!61 &252236174
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -451,7 +450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0469c20f4f15c43aa7ba44507ebadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!61 &252890406
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -709,7 +707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e01084c0954b149bfe2c5846a91545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  xSpeed: 2
+  ySpeed: 4
+  targetOffset: {x: 0, y: 0, z: -10}
 --- !u!81 &458449968
 AudioListener:
   m_ObjectHideFlags: 0
@@ -806,7 +806,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0469c20f4f15c43aa7ba44507ebadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!61 &477403289
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1238,7 +1237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 834008899968287034, guid: d625dfac5230ba74c8c7e4b13b2d3893, type: 3}
       propertyPath: m_Name
-      value: Player 1
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d625dfac5230ba74c8c7e4b13b2d3893, type: 3}
@@ -1516,7 +1515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0469c20f4f15c43aa7ba44507ebadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!61 &1826302201
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1639,7 +1637,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0469c20f4f15c43aa7ba44507ebadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!61 &1917292020
 BoxCollider2D:
   m_ObjectHideFlags: 0

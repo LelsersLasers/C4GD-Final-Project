@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OneWayPlatform : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
 
     private BoxCollider2D bc;
     private float activateDelay = 0;

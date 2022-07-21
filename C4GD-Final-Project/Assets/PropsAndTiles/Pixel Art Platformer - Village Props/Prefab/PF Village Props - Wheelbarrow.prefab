@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4943143807696646567}
   m_Layer: 0
   m_Name: TX Village Props Wheelbarrow
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -608648129
-  m_SortingLayer: 1
+  m_SortingLayerID: -1050124763
+  m_SortingLayer: 6
   m_SortingOrder: 8
   m_Sprite: {fileID: 21300116, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 7633690333504443610}
   m_Layer: 0
   m_Name: TX Village Props Wheelbarrow Wheel
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,8 +279,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -608648129
-  m_SortingLayer: 1
+  m_SortingLayerID: -1050124763
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: 21300118, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

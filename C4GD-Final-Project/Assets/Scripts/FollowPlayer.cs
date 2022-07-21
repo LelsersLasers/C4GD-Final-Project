@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
 
     public float xSpeed = 2f;
     public float ySpeed = 4f;
 
     public Vector3 targetOffset = new Vector3(0f, 0f, -10f);
+
+    void Start()
+    {
+        player = GameObject.Find("Player");
+    }
 
     // Update is called once per frame
     void LateUpdate()

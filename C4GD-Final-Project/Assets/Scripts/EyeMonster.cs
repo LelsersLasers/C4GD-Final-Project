@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EyeMonster : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     public GameObject eyeMonsterProjectile;
     private Rigidbody2D eyeRb;
     private Animator eyeAnim;
@@ -27,6 +27,7 @@ public class EyeMonster : MonoBehaviour
         eyeAnim = GetComponent<Animator>();
         eyeSR = GetComponent<SpriteRenderer>();
         startPos = transform.position;
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
