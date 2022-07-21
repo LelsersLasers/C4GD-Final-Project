@@ -73,8 +73,8 @@ public class Boss : MonoBehaviour
         }
         for (int i = 0; i < 3; i++)
         {
-            Instantiate(bossFireball2, player.transform.position + new Vector3(12 * leftOrRight, player.transform.position.y + yOffset + i, 0), bossFireball2.transform.rotation);
-            Instantiate(bossFireball2, player.transform.position + new Vector3(-12 * leftOrRight, player.transform.position.y + yOffset - i, 0), bossFireball2.transform.rotation);
+            Instantiate(bossFireball2, player.transform.position + new Vector3(15 * leftOrRight, player.transform.position.y + yOffset + i, 0), bossFireball2.transform.rotation);
+            Instantiate(bossFireball2, player.transform.position + new Vector3(-15 * leftOrRight, player.transform.position.y + yOffset - i, 0), bossFireball2.transform.rotation);
         }
     }
 

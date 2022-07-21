@@ -35,6 +35,7 @@ public class EyeMonster : MonoBehaviour
     {
         if (GetComponent<Enemy>().currentHealth <= 0)
         {
+            eyeRb.velocity = Vector2.zero;
             this.enabled = false;
         }
         lockedOn = Vector2.Distance(player.transform.position, transform.position) <= aggroRange;

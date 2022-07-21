@@ -1472,7 +1472,7 @@ MonoBehaviour:
   attackCd: 1.5
   bossFireball1: {fileID: 8597063348304242930, guid: 69f0edbf5dad6bd4294b4691466a05b1, type: 3}
   bossFireball2: {fileID: 5398089492462119363, guid: 8da3b9ef3533cef488ee0db5e8e0dfe5, type: 3}
-  bossSummon: {fileID: 89549885525600131, guid: a621a42dfa3ee694d89f75f5e68511a5, type: 3}
+  bossSummon: {fileID: 3019510556536286767, guid: a61aec0ebab354046afbdf53af1ab0e7, type: 3}
   leftBound: 2
   rightBound: 25
 --- !u!1 &871674693
