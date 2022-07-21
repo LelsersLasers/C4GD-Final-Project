@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour
     public float leftBound;
     public float rightBound;
     private int attackChooser = 0;
+
     // Start is called before the first frame update
     void Start()
     {

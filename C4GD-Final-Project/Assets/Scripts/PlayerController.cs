@@ -218,7 +218,6 @@ public class PlayerController : MonoBehaviour
         isAttacking = true;
         yield return new WaitForSeconds(0.2f);
         attackPoint.position = transform.position;
-        Debug.Log("Done" + Time.time);
         isAttacking = false;
     }
 
