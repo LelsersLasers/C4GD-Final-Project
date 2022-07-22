@@ -13,7 +13,7 @@ public class Boss : MonoBehaviour
     public GameObject bossFireball2;
     public GameObject bossSummon;
     public GameObject bossLaser;
-    private float timeSinceAttack = 1f;
+    private float timeSinceAttack;
     public float leftBound;
     public float rightBound;
     private int attackChooser = 0;
@@ -25,6 +25,7 @@ public class Boss : MonoBehaviour
         bossAnim = GetComponent<Animator>();
         bossSR = GetComponent<SpriteRenderer>();
         player = GameObject.Find("Player");
+        timeSinceAttack = Time.time + 2f;
     }
 
     // Update is called once per frame
@@ -89,9 +90,9 @@ public class Boss : MonoBehaviour
         int leftOrRight = (Random.Range(1, 3) * 2) - 3;
         float yOffset = 0;
         //If the player is around less than 2 blocks above the ground
-        if (player.transform.position.y < 0)
+        if (player.transform.position.y < 2)
         {
-            yOffset = 3.5f;
+            yOffset = 1.5f;
         }
         for (int i = 0; i < 3; i++)
         {
