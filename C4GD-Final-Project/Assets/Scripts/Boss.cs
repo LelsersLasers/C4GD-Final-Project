@@ -84,11 +84,11 @@ public class Boss : MonoBehaviour
     void AttackTwo()
     {
         int leftOrRight = (Random.Range(1, 3) * 2) - 3;
-        int yOffset = 0;
+        float yOffset = 0;
         //If the player is around less than 2 blocks above the ground
-        if (player.transform.position.y < -1)
+        if (player.transform.position.y < 0)
         {
-            yOffset = 4;
+            yOffset = 3.5f;
         }
         for (int i = 0; i < 3; i++)
         {
@@ -104,6 +104,6 @@ public class Boss : MonoBehaviour
 
     void AttackFour()
     {
-        Instantiate(bossSummon, new Vector3((leftBound + rightBound) / 2, 1.5f, 0), bossSummon.transform.rotation);
+        Instantiate(bossSummon, new Vector3((leftBound + rightBound) / 2, 1f, 0), bossSummon.transform.rotation);
     }
 }
