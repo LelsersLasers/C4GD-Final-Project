@@ -13,6 +13,14 @@ public class MenuButtons : MonoBehaviour
         SceneManager.LoadScene("ControlsScreen");
     }
     public void switchToLevel1() {
-        SceneManager.LoadScene("Level 1");
+        Scene currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name == "TavernFight")
+        {
+            SceneManager.LoadScene("TavernFight");
+        }
+        else
+        {
+            SceneManager.LoadScene("Level 1");
+        }
     }
 }
