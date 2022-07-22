@@ -724,6 +724,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &394270478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 917924798301455784, guid: 3ee39412bbbeb514db22bb2ba4d87422, type: 3}
+  m_PrefabInstance: {fileID: 1859738118}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &458449966
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,13 +757,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 458449966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3e01084c0954b149bfe2c5846a91545, type: 3}
+  m_Script: {fileID: 11500000, guid: 217890dd8f4a7144abef4ce2aa336d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Box: {fileID: 0}
+  player: {fileID: 394270478}
   xSpeed: 2
   ySpeed: 4
-  currentOffset: {x: 0, y: 0, z: 0}
   targetOffset: {x: 0, y: 0, z: -10}
 --- !u!81 &458449968
 AudioListener:

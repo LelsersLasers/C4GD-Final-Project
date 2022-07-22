@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
                 dashCd = 1.5f;
                 StartCoroutine(Dash(GetDirection()));
             }
-            if (Input.GetKey("x") && !isDashing && Time.time >= nextAttackTime)
+            if ((Input.GetKey("x") || Input.GetMouseButtonDown(0)) && !isDashing && Time.time >= nextAttackTime)
             {
                 StartCoroutine(Attack(GetDirection()));
                 nextAttackTime = Time.time + attackCd;
@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private IEnumerator turnIFrameOff() {
-        yield return new WaitForSeconds(iFrameDuration);
+        yield return new WaitForSeconds(iFrameDuration / 2);
         iFramesActive = false;
     }
 
