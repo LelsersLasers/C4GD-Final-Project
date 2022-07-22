@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsRunning", false);
     }
 
-    void Win()
+    public void Win()
     {
         winUI.SetActive(true);
     }
