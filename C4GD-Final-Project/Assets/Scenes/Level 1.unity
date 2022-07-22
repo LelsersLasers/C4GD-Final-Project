@@ -24253,7 +24253,17 @@ MonoBehaviour:
     to choose
     the direction you dash.
 
-    You can dash diagonally.'
+    You can dash diagonally.
+
+
+    The dash has a cooldown
+    of
+
+    1.5 seconds (as indictated by
+
+    the blue bar).
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
