@@ -12,6 +12,7 @@ public class Boss : MonoBehaviour
     public GameObject bossFireball1;
     public GameObject bossFireball2;
     public GameObject bossSummon;
+    public GameObject bossLaser;
     private float timeSinceAttack = 1f;
     public float leftBound;
     public float rightBound;
@@ -35,18 +36,22 @@ public class Boss : MonoBehaviour
         }
         if (Time.time > timeSinceAttack)
         {
-            attackChooser = Random.Range(0, 9);
-            if (attackChooser <= 3)
+            attackChooser = Random.Range(0, 10);
+            if (attackChooser < 3)
             {
                 AttackOne();
             }
-            else if (attackChooser <= 7)
+            else if (attackChooser < 6)
             {
                 AttackTwo();
             }
-            else
+            else if (attackChooser < 9)
             {
                 AttackThree();
+            }
+            else
+            {
+                AttackFour();
             }
             timeSinceAttack = Time.time + attackCd;
         }
@@ -79,6 +84,11 @@ public class Boss : MonoBehaviour
     }
 
     void AttackThree()
+    {
+        Instantiate(bossLaser, new Vector3(player.transform.position.x, 1.4f, 0), bossLaser.transform.rotation);
+    }
+
+    void AttackFour()
     {
         Instantiate(bossSummon, new Vector3((leftBound + rightBound) / 2, 1.5f, 0), bossSummon.transform.rotation);
     }

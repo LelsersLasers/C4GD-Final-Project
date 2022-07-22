@@ -835,8 +835,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e01084c0954b149bfe2c5846a91545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Box: {fileID: 0}
   xSpeed: 2
   ySpeed: 4
+  currentOffset: {x: 0, y: 0, z: 0}
   targetOffset: {x: 0, y: 0, z: -10}
 --- !u!81 &458449968
 AudioListener:
@@ -2707,6 +2709,10 @@ PrefabInstance:
     - target: {fileID: 8216457628637289309, guid: 08aae283bf59cbb49b1e507815bceb5a, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216457628637289309, guid: 08aae283bf59cbb49b1e507815bceb5a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08aae283bf59cbb49b1e507815bceb5a, type: 3}
