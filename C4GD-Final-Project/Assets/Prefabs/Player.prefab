@@ -277,13 +277,13 @@ MonoBehaviour:
   attackPoint: {fileID: 834008897875268002}
   hp: {fileID: 834008898297433010}
   cd: {fileID: 4608608918437326856}
-  attackRange: 0.4
+  attackRange: 1.6
   attackCd: 1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
   iFramesActive: 0
-  iFrameDuration: 0.2
+  iFrameDuration: 0.5
 --- !u!70 &4608608918671476161
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

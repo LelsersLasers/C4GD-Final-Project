@@ -35,7 +35,7 @@ public class Pointer : MonoBehaviour
         {
             RightUp.flipX = true;
             //Vector3 SwapPos = new Vector3 (RightUpV.transform.position.x,RightUpV.transform.position.y,RightUpV.transform.rotation.z + 90);
-            RightUpV += (0,0,RightUpV.transform.rotation.z + 90);
+            //RightUpV += (0,0,RightUpV.transform.rotation.z + 90);
             Right.flipX = true;
             RightDown.flipX = true;
         }
