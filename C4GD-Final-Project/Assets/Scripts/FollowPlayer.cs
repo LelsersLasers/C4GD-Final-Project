@@ -53,7 +53,7 @@ public class FollowPlayer : MonoBehaviour
    
          xSpeed = 0f;
         //Debug.Log(dist);
-        if (dist >= MiddlePointX-1||dist <= -MiddlePointX+1)
+        if (dist >= MiddlePointX-.5||dist <= -MiddlePointX+.5)
         {
             targetOffset = new Vector3(0f, player.transform.position.y, -10f);
             currentOffset = transform.position - player.transform.position;
