@@ -103,7 +103,8 @@ MonoBehaviour:
   range: 5
   hp: {fileID: 8216457629325990836}
   hpW: 0
-  maxHealth: 105
+  alive: 1
+  maxHealth: 120
   currentHealth: 0
   dmg: 0
 --- !u!50 &8216457628637289298

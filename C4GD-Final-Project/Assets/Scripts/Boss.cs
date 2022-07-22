@@ -25,7 +25,7 @@ public class Boss : MonoBehaviour
         bossAnim = GetComponent<Animator>();
         bossSR = GetComponent<SpriteRenderer>();
         player = GameObject.Find("Player");
-        timeSinceAttack = Time.time + 2f;
+        timeSinceAttack = Time.time + 1f;
     }
 
     // Update is called once per frame
@@ -40,7 +40,7 @@ public class Boss : MonoBehaviour
         }
         if (GetComponent<Enemy>().currentHealth <= GetComponent<Enemy>().maxHealth / 3)
         {
-            attackCd = 1f;
+            attackCd = 0.9;
         }
         if (player.transform.position.x > leftBound && player.transform.position.x < rightBound)
         {
