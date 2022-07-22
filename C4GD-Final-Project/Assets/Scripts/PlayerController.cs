@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
     private bool isAttacking = false;
     private float dashCd = 0;
-    private float orientation = 1f;
+    public float orientation = 1f;
 
     public bool alive = true;
 
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public float deathY = -25f;
     public GameObject deathUI;
     public GameObject winUI;
+    
 
     private AudioSource audioSource;
     public AudioClip attackSound;
