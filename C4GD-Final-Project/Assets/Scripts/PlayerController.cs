@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private IEnumerator turnIFrameOff() {
-        yield return new WaitForSeconds(iFrameDuration);
+        yield return new WaitForSeconds(iFrameDuration / 2);
         iFramesActive = false;
     }
 
