@@ -19,7 +19,7 @@ public class Pointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(player.orientation);
+        
         Point(GetDirection());
        
     }
@@ -60,7 +60,7 @@ public class Pointer : MonoBehaviour
         Down.SetActive(false);        
 
 
-        Debug.Log("working");
+
         if (direction == new Vector2(1, 1).normalized)
         {
             RightUp.SetActive(true);
