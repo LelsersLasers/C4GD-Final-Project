@@ -24789,7 +24789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 69.66, y: 3.67}
+  m_AnchoredPosition: {x: 65.72, y: 2.78}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1245902661
@@ -24812,19 +24812,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press X to attack (melee).
+  m_text: 'Press X or left mouse button
+
+    to attack (melee).
 
 
-    Use the arrow keys or WASD
+    Use the arrow
+    keys or WASD
 
-    to choose
-    the direction you attack.
+    to choose the direction you attack.
 
     You can attack diagonally.
 
 
-    Note: After taking
-    damage or dashing, you are temporarily
+    Note:
+    After taking damage or dashing, you are temporarily
 
     immune to damage'
   m_isRightToLeft: 0
