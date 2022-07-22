@@ -40,7 +40,7 @@ public class Boss : MonoBehaviour
         }
         if (GetComponent<Enemy>().currentHealth <= GetComponent<Enemy>().maxHealth / 3)
         {
-            attackCd = 0.9;
+            attackCd = 0.9f;
         }
         if (player.transform.position.x > leftBound && player.transform.position.x < rightBound)
         {
