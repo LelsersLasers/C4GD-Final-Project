@@ -902,17 +902,17 @@ MonoBehaviour:
   jumpSound: {fileID: 0}
   dashSound: {fileID: 0}
   maxHealth: 10
-  attackPoint: {fileID: 752610878757797254}
-  hp: {fileID: 752610878610057110}
-  cd: {fileID: 4473798820811660332}
-  attackRange: 0.4
+  attackPoint: {fileID: 834008897875268002}
+  hp: {fileID: 834008898297433010}
+  cd: {fileID: 4608608918437326856}
+  attackRange: 1.6
   attackCd: 1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
   iFramesActive: 0
-  iFrameDuration: 0.2
---- !u!70 &4473798821518862821
+  iFrameDuration: 0.5
+--- !u!70 &4608608918671476161
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

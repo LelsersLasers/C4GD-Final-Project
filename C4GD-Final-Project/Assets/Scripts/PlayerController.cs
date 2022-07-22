@@ -37,13 +37,13 @@ public class PlayerController : MonoBehaviour
     private int currentHealth;
     
     public Transform attackPoint;
+    private GameObject playerAttack;
 
     public Transform hp;
     private float hpW;
 
     public Transform cd;
     private float cdW;
-
 
     public float attackRange = 0.5f;
     public float attackCd = 1.0f;
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        playerAttack = GameObject.Find("Player Attack");
         currentHealth = maxHealth;
         hpW = hp.localScale.x;
         cdW = cd.localScale.x;
@@ -207,7 +208,7 @@ public class PlayerController : MonoBehaviour
     {
         deathUI.SetActive(true);
         alive = false;
-        rb.velocity = new Vector2(0, 0);
+        rb.velocity = new Vector2(0, rb.velocity.y);
         animator.SetBool("IsRunning", false);
     }
 
@@ -220,10 +221,7 @@ public class PlayerController : MonoBehaviour
     {
         audioSource.PlayOneShot(attackSound, 1f);
         //Set trigger for animator once we have animations
-        /*
-        attackPoint.RotateAround(transform.position, new Vector3(0,0,1), Vector2.SignedAngle(new Vector2(1,0), direction));
-        */
-        attackPoint.position = transform.position + new Vector3(direction.x * 1.2f, direction.y * 1.2f, 0);
+        attackPoint.position = transform.position + new Vector3(direction.x * 2f, direction.y * 2f, 0);
         Collider2D[] hitTargets = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D target in hitTargets)
         {
@@ -231,7 +229,9 @@ public class PlayerController : MonoBehaviour
         }
         //Time should be as long as the attack animation
         isAttacking = true;
+        playerAttack.GetComponent<PlayerAttack>().StartAttack(direction);
         yield return new WaitForSeconds(0.2f);
+        playerAttack.GetComponent<PlayerAttack>().EndAttack();
         attackPoint.position = transform.position;
         isAttacking = false;
     }

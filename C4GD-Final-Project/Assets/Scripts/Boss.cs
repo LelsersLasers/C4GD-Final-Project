@@ -30,23 +30,37 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<Enemy>().currentHealth <= GetComponent<Enemy>().maxHealth * 2 / 3)
+        {
+            attackCd = 1.25f;
+        }
+        if (GetComponent<Enemy>().currentHealth <= GetComponent<Enemy>().maxHealth / 3)
+        {
+            attackCd = 0.9f;
+        }
         if (player.transform.position.x > leftBound && player.transform.position.x < rightBound)
         {
             transform.position = new Vector3(player.transform.position.x, transform.position.y, 0);
         }
         if (Time.time > timeSinceAttack)
         {
-            attackChooser = Random.Range(0, 10);
-            if (attackChooser < 3)
+            attackChooser = Random.Range(0, 15);
+            if (attackChooser < 4)
             {
                 AttackOne();
             }
-            else if (attackChooser < 6)
+            else if (attackChooser < 8)
             {
                 AttackTwo();
             }
-            else if (attackChooser < 9)
+            else if (attackChooser < 12)
             {
+                AttackThree();
+            }
+            else if (attackChooser < 14)
+            {
+                AttackOne();
+                AttackTwo();
                 AttackThree();
             }
             else

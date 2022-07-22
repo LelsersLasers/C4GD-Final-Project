@@ -19,6 +19,22 @@ public class Pointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(orientation);
+        if (orientation == 1)
+        {
+            RightUp.flipX = false;
+            Right.flipX = false;
+            RightDown.flipX = false;
+        }
+        else if (orientation == -1)
+        {
+            RightUp.flipX = true;
+            //Vector3 SwapPos = new Vector3 (RightUpV.transform.position.x,RightUpV.transform.position.y,RightUpV.transform.rotation.z + 90);
+            RightUpV += (0,0,RightUpV.transform.rotation.z + 90);
+            Right.flipX = true;
+            RightDown.flipX = true;
+        }
+        StartCoroutine(Point(GetDirection()));
         Debug.Log(player.orientation);
         Point(GetDirection());
        
