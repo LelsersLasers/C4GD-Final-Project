@@ -240,11 +240,38 @@ public class PlayerController : MonoBehaviour
         audioSource.PlayOneShot(dashSound, 0.1f);
         rb.velocity = direction * dashSpeed;
         isDashing = true;
+        iFramesActive = true;
+        StartCoroutine(turnIFrameOff());
         rb.gravityScale = 0f;
+        if (direction == new Vector2(1, 1).normalized || direction == new Vector2(-1, 1).normalized)
+        {
+            animator.SetTrigger("DashUFTrigger");
+        }
+        else if (direction == new Vector2(1, 0).normalized || direction == new Vector2(-1, 0).normalized)
+        {
+            animator.SetTrigger("DashFTrigger");
+        }
+        else if (direction == new Vector2(1, -1).normalized || direction == new Vector2(-1, -1).normalized)
+        {
+            animator.SetTrigger("DashDFTrigger");
+        }
+        else if (direction == new Vector2(0, 1).normalized)
+        {
+            animator.SetTrigger("DashUTrigger");
+        }
+        else if (direction == new Vector2(0, -1).normalized)
+        {
+            animator.SetTrigger("DashDTrigger");
+        }
         yield return new WaitForSeconds(0.15f);
         isDashing = false;
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / 5);
         rb.gravityScale = 4.0f;
+    }
+
+    private IEnumerator turnIFrameOff() {
+        yield return new WaitForSeconds(iFrameDuration);
+        iFramesActive = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

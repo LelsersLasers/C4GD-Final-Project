@@ -12,7 +12,7 @@ public class Boss : MonoBehaviour
     public GameObject bossFireball1;
     public GameObject bossFireball2;
     public GameObject bossSummon;
-    private float timeSinceAttack = 0f;
+    private float timeSinceAttack = 1f;
     public float leftBound;
     public float rightBound;
     private int attackChooser = 0;
@@ -80,6 +80,6 @@ public class Boss : MonoBehaviour
 
     void AttackThree()
     {
-        Instantiate(bossSummon, new Vector3((leftBound + rightBound) / 2, 3, 0), bossSummon.transform.rotation);
+        Instantiate(bossSummon, new Vector3((leftBound + rightBound) / 2, 1.5f, 0), bossSummon.transform.rotation);
     }
 }

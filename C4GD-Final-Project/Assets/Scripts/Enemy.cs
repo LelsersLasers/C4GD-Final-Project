@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
         //Set death animation later
         sr.color = Color.red;
         hp.localScale = new Vector3(0, 0, 0);
-        rb.velocity = new Vector2(0, rb.velocity.y);
+        rb.velocity = new Vector2(0, 0);
         this.enabled = false;
         GetComponent<Collider2D>().enabled = false;
         StartCoroutine(DelayedDestory());
@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator DelayedDestory()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 
