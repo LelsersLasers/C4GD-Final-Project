@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
     private bool isAttacking = false;
     private float dashCd = 0;
-    private float orientation = 1f;
+    public float orientation = 1f;
 
     public bool alive = true;
 
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public float deathY = -25f;
     public GameObject deathUI;
     public GameObject winUI;
+    
 
     private AudioSource audioSource;
     public AudioClip attackSound;
@@ -43,7 +44,6 @@ public class PlayerController : MonoBehaviour
 
     public Transform cd;
     private float cdW;
-
 
     public float attackRange = 0.5f;
     public float attackCd = 1.0f;
@@ -208,7 +208,7 @@ public class PlayerController : MonoBehaviour
     {
         deathUI.SetActive(true);
         alive = false;
-        rb.velocity = new Vector2(0, 0);
+        rb.velocity = new Vector2(0, rb.velocity.y);
         animator.SetBool("IsRunning", false);
     }
 
