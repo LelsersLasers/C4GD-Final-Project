@@ -19,7 +19,7 @@ public class FollowPlayer : MonoBehaviour
 
   
     public Vector3 currentOffset;
-    public Vector3 targetOffset = new Vector3(0f, 0f, -10f);
+    public Vector3 targetOffset = new Vector3(0f, 6f, -10f);
    
 
     void Start()
@@ -41,7 +41,7 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 targetOffset = new Vector3(0f, 0, -10f);
+        Vector3 targetOffset = new Vector3(0f, 4f, -10f);
         Vector3 currentOffset = transform.position - player.transform.position;
         Vector3 move = (targetOffset - currentOffset) * Time.deltaTime;
         
