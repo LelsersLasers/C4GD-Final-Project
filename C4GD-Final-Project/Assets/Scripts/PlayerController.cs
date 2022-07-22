@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     public Transform cd;
     private float cdW;
 
-
     public float attackRange = 0.5f;
     public float attackCd = 1.0f;
     private float nextAttackTime = 0f;
@@ -206,7 +205,7 @@ public class PlayerController : MonoBehaviour
     {
         deathUI.SetActive(true);
         alive = false;
-        rb.velocity = new Vector2(0, 0);
+        rb.velocity = new Vector2(0, rb.velocity.y);
         animator.SetBool("IsRunning", false);
     }
 
