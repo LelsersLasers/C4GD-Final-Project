@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     public Transform hp;
     public float hpW;
 
+    public bool alive = true;
+
     public int maxHealth;
     public int currentHealth;
     public int dmg;
@@ -57,6 +59,7 @@ public class Enemy : MonoBehaviour
         rb.velocity = new Vector2(0, 0);
         this.enabled = false;
         GetComponent<Collider2D>().enabled = false;
+        alive = false;
         StartCoroutine(DelayedDestory());
     }
 

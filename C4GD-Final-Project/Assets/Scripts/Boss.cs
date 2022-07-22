@@ -30,6 +30,9 @@ public class Boss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GetComponent<Enemy>().alive) {
+            player.GetComponent<PlayerController>().Win();
+        }
         if (GetComponent<Enemy>().currentHealth <= GetComponent<Enemy>().maxHealth * 2 / 3)
         {
             attackCd = 1.25f;
